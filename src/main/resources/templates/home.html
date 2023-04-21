@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" />
+    <link th:href="favicon.ico" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__container">
+            <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
+
+            <button type="button" class="menu__icon icon-menu"><span></span></button>
+            <div class="header__menu menu">
+                <nav class="menu__body">
+                    <ul class="menu__list">
+                        <li class="menu__item goto"><a th:href="@{/main-author}" class="menu__link">[[#{button.about.author}]]</a></li>
+                        <li class="menu__item goto"><a th:href="@{/main-about}" class="menu__link">[[#{button.about.books}]]</a></li>
+                        <li class="menu__item goto"><a th:href="@{/main-books}" class="menu__link">[[#{button.buy.books}]]</a></li>
+                        <li class="menu__item goto"><a th:href="@{/reviews}" class="menu__link">[[#{button.reviews}]]</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="header__right">
+                <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
+                    <div class="langs__body">
+                        <button type="button" data-spoller class="langs__current">[[#{button.ukrainian}]]
+                            <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
+                                <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
+                            </svg>
+                        </button>
+                        <div class="langs__list">
+                            <a class="langs__item">[[#{button.russian}]]</a>
+                            <a class="langs__item">[[#{button.english}]]</a>
+                        </div>
+                    </div>
+                </div>
+                <a th:href="@{/}" data-da=".menu__body, 480, last" class="btn btn-acent header__btn">[[#{button.cart}]]</a>
+            </div>
+
+        </div>
+    </header>
+    <main class="page-main">
+        <section data-fullscreen class="section main-hero">
+            <div class="main-hero__container">
+                <div class="main-hero__body">
+                    <h1 class="main-title main-hero__title">[[#{slogan.book}]]<div class="title-group">[[#{slogan.message}]]</div>
+                    </h1>
+                    <div class="main-hero__desc">
+                        <p>Эти книги изменили ментальность более 100000&nbsp;тысячи людей. Представляешь?</p>
+                        <p>У меня получается при помощи письма достучаться в самые постойные места души и дать вектор из их внутренних проблем.</p>
+                    </div>
+                </div>
+                <div class="main-hero__img">
+                    <picture>
+                        <source th:srcset="@{/image/main/hero-img.webp}" type="image/webp"/>
+                        <img th:src="@{/image/main/hero-img.png}" alt="Isaenko"/>
+                    </picture>
+                </div>
+            </div>
+        </section>
+
+        <section id="main-author" class="section main-author">
+            <div class="main-author__container">
+                <h2 class="section__title main-author__title">
+                    Привет, мой милый друг. <br>
+                    Добро пожаловать во Вселенную Доктора Исаенко.
+                </h2>
+
+                <div class="main-author__text">
+                    <p>
+                        Как ты? Как у тебя внутри? Тепло ли тебе, холодно? Ты сегодня ел? Не голоден? Как дела у твоих близких? Все ли у тебя хорошо? Мы ещё с тобой не знакомы, но я уверена, когда мы с тобой познакомимся ближе мы будем словно родственники знающие друг друга тысячи лет.
+                    </p>
+                    <p>Позволь мне представиться. Меня зовут Светлана. Фамилия моя Исаенко. Я из Украины. Мой родной город Харьков.</p>
+                    <p>
+                        Я не умею готовить борщ и тебя я бы не угостила своими кулинарными шедеврами если нам довелось встретиться у меня на кухне, но у меня есть другой талант- умею лечить людей. Я врач психитар, психотерапевт. У меня три частных психиатрических клиники. Две в Харькове. Одна в Киеве. Кандидат медицинских наук. И ещё, Я пишу книги. Книги о жизни, любви и смерти, возвышенности и низменности человеческих душ и веры в Человечество. Это романы.
+                    </p>
+                    <p>
+                        Но ты не подумай, это не заумные книги заумного врача, это книги, на примере героев которых я даю возможность немного посмотреть на свою жизнь под другим углом. Где-то с юмором. А где - то даже заглянуть честно внутрь себя…Если ты здесь и читаешь эти строки, значит ты уже мой адресат. И помни, мои книги всегда оказываются в нужный период времени нужно личности. Знаю, у тебя все будет очень хорошо. Ведь они психокинетические…
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="main-about" class="section main-about">
+            <div class=" main-about__container">
+                <h2 class="section__title  main-about__title">О чем эти книги?</h2>
+                <p class="main-about__text">Каждый найдет свои ответы. Давай так, ты мне потом ответишь о чем они их прожив. Единственное, что скажу:</p>
+
+                <div class="main-about__list">
+                    <div class="main-about__item">
+                        <div class="main-about__item-icon">
+                            <svg viewBox="0 0 105 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
+                            </svg>
+                        </div>
+                        <h3 class="main-about__item-title">«Невыдуманный истории выдуманных людей»</h3>
+                        <p class="main-about__item-desc">
+                            Они о жизни. О низменности и возвышенности. (Только внимательно, там даже есть настоящий секс)…
+                        </p>
+                    </div>
+                    <div class="main-about__item">
+                        <div class="main-about__item-icon">
+                            <svg viewBox="0 0 105 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
+                            </svg>
+                        </div>
+                        <h3 class="main-about__item-title">“Любовь Ч”</h3>
+                        <p class="main-about__item-desc">
+                            О Человечности. О гранях любви человека и о том, как война оголяла сущность Человека…
+                        </p>
+                    </div>
+                    <div class="main-about__item">
+                        <div class="main-about__item-icon">
+                            <svg viewBox="0 0 105 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
+                            </svg>
+                        </div>
+                        <h3 class="main-about__item-title">“Монстры с которыми мы живем” </h3>
+                        <p class="main-about__item-desc">
+                            Про объюзивные отношения и по моему мнению их просто обязана прочесть каждая женщина.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="main-books" class="section main-books">
+            <div class="main-books__container">
+                <h3 class="main-books__subtitle">
+                    <span>Ну пожалуй все. Остановлю себя. Хочу дать тебе пространство. Обнимаю тебя всем сердцем</span>
+                </h3>
+                <h2 class="section__title main-books__title">Добро пожаловать в удивительно ужасающе прекрасный мир книг Светлаы Исаенко</h2>
+
+                <div class="main-books__list">
+                    <div class="main-books__item">
+                        <div class="main-books__item-img" style="background-image: url(image/main/books/01.png);">
+                            <picture>
+                                <source th:srcset="@{/image/main/books/book-1.webp}" type="image/webp">
+                                <img th:src="@{/image/main/books/book-1.png}" alt="">
+                            </picture>
+                        </div>
+                        <div class="main-books__item-group">
+                            <h3 class="main-books__item-title">Невыдуманный истории выдуманных людей</h3>
+                            <a href="" class="btn">Подробнее</a>
+                        </div>
+                    </div>
+                    <div class="main-books__item">
+                        <div class="main-books__item-img" style="background-image: url(image/main/books/02.png);">
+                            <picture>
+                                <source th:srcset="@{image/main/books/book-2.webp}" type="image/webp">
+                                <img th:src="@{image/main/books/book-2.png}" alt="">
+                            </picture>
+                        </div>
+                        <div class="main-books__item-group">
+                            <h3 class="main-books__item-title">Монстры с которыми мы живем </h3>
+                            <a href="" class="btn">Подробнее</a>
+                        </div>
+                    </div>
+                    <div class="main-books__item">
+                        <div class="main-books__item-img" style="background-image: url(image/main/books/03.png);">
+                            <picture>
+                                <source th:srcset="@{/image/main/books/book-3.webp}" type="image/webp">
+                                <img th:src="@{img/main/books/book-3.png}" alt="">
+                            </picture>
+                        </div>
+                        <div class="main-books__item-group">
+                            <h3 class="main-books__item-title">Любовь Ч</h3>
+                            <a href="" class="btn">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section set">
+            <div class="set__container">
+                <h2 class="section__title set__title">Воспользуйся выгодным предложением и купи три книги сразу</h2>
+                <p class="set__text">Хотите сэкономить до 20% на покупке книг? Купите три книги сразу и получите скидку!</p>
+
+
+                <div class="set__img">
+                    <picture>
+                        <source th:srcset="@{image/main/books/set.webp}" type="image/webp">
+                        <img th:src="@{image/main/books/set.png}" alt="">
+                    </picture>
+                </div>
+
+                <a href="" class="btn btn-acent">купить комплект книг</a>
+            </div>
+        </section>
+        <section id="reviews" class="section reviews">
+            <h2 class="section__title reviews__title">отзывы о книгах</h2>
+
+            <div class="reviews__slider swiper">
+                <div class="reviews__wrapper swiper-wrapper">
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                        <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                        <img th:src="@{image/main/reviews/01.png}" alt="">
+                    </picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                    <div class="reviews__slide swiper-slide">
+                        <picture>
+                            <source th:srcset="@{image/main/reviews/01.webp}" type="image/webp">
+                            <img th:src="@{image/main/reviews/01.png}" alt=""></picture>
+                    </div>
+                </div>
+                <div class="reviews__pagination"></div>
+            </div>
+        </section>
+
+        <script>
+
+        </script>
+    </main>
+    <footer class="footer">
+        <div class="footer__container">
+            <a href="" class="footer__link">Офферта</a>
+
+            <div class="social">
+                <a href="https://www.facebook.com/dr.isaenko.clinic" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M13 2.15544C13 1.01036 11.9896 0 10.8446 0H2.15544C1.01036 0 0 1.01036 0 2.15544V10.8446C0 11.9896 1.01036 13 2.15544 13H6.53368V8.0829H4.9171V5.92746H6.53368V5.05181C6.53368 3.56995 7.6114 2.29015 8.95855 2.29015H10.7098V4.44559H8.95855C8.75648 4.44559 8.5544 4.64767 8.5544 5.05181V5.92746H10.7098V8.0829H8.5544V13H10.8446C11.9896 13 13 11.9896 13 10.8446V2.15544Z" fill="white"></path>
+                    </svg>
+
+                </a>
+                <a href="https://instagram.com/dr.isaenko.clinic" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M11.15 0H1.85C0.799999 0 0 0.8 0 1.85V11.15C0 12.2 0.799999 13 1.85 13H11.15C12.2 13 13 12.2 13 11.15V1.85C13 0.8 12.2 0 11.15 0ZM6.5 10.4C8.65 10.4 10.4 8.7 10.4 6.65C10.4 6.3 10.35 5.9 10.25 5.6H11.35V10.9C11.35 11.15 11.15 11.4 10.85 11.4H2.15C1.9 11.4 1.65 11.2 1.65 10.9V5.55H2.8C2.7 5.9 2.65 6.25 2.65 6.6C2.6 8.7 4.35 10.4 6.5 10.4ZM6.5 8.9C5.1 8.9 4 7.8 4 6.45C4 5.1 5.1 4 6.5 4C7.9 4 9 5.1 9 6.45C9 7.85 7.9 8.9 6.5 8.9ZM11.3 3.55C11.3 3.85 11.05 4.1 10.75 4.1H9.35C9.05 4.1 8.8 3.85 8.8 3.55V2.2C8.8 1.9 9.05 1.65 9.35 1.65H10.75C11.05 1.65 11.3 1.9 11.3 2.2V3.55Z" fill="white"></path>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCZFS3cju-ynf-4ZRjdcnAaA" class="social__item">
+                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
+                        <path d="M15 4.22222C15 3.88888 14.9453 3.5 14.9453 3.05556C14.8905 2.61111 14.8358 2.16666 14.781 1.77778C14.6715 1.33333 14.5073 1 14.1788 0.722224C13.9051 0.444446 13.5219 0.277774 13.1387 0.222219C11.8796 0.0555522 10.0183 0 7.50001 0C4.98176 0 3.06569 0.0555522 1.86131 0.222219C1.4781 0.277774 1.09489 0.444446 0.821168 0.722224C0.547445 1 0.328464 1.33333 0.218975 1.77778C0.109486 2.16666 0.0547479 2.55556 0.0547479 3.05556C3.33766e-06 3.5 0 3.88888 0 4.22222C0 4.55555 0 4.94444 0 5.5C0 6.05555 0 6.5 0 6.77778C0 7.11111 0.0547479 7.5 0.0547479 7.94445C0.109492 8.38889 0.16423 8.83333 0.218975 9.22222C0.328464 9.66666 0.492701 10 0.821168 10.2778C1.09489 10.5556 1.4781 10.7222 1.86131 10.7778C3.12044 10.9444 4.98176 11 7.50001 11C10.0183 11 11.9343 10.9444 13.1387 10.7778C13.5219 10.7222 13.9051 10.5556 14.1788 10.2778C14.4526 10 14.6715 9.66666 14.781 9.22222C14.8905 8.83333 14.9453 8.44445 14.9453 7.94445C15 7.5 15 7.11111 15 6.77778C15 6.44444 15 6.05555 15 5.5C15 4.94444 15 4.49999 15 4.22222ZM10.4015 5.94444L6.07665 8.66666C6.0219 8.72222 5.91241 8.77778 5.80292 8.77778C5.69344 8.77778 5.63869 8.77778 5.5292 8.72222C5.36497 8.61111 5.25548 8.44444 5.25548 8.22222V2.72222C5.25548 2.5 5.36497 2.33333 5.5292 2.22222C5.69344 2.11111 5.91241 2.11111 6.07665 2.22222L10.4015 4.94444C10.5657 5.05555 10.6752 5.22222 10.6752 5.38889C10.6752 5.55555 10.5657 5.83333 10.4015 5.94444Z" fill="white"></path>
+                    </svg>
+                </a>
+                <a href="https://dr-isaenko.com/" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M12.9999 6.3208H9.92866C9.89613 3.50254 9.0187 1.10777 7.78362 0.114035C10.6923 0.700501 12.9186 3.24185 12.9998 6.3208H12.9999ZM6.32119 6.3208H3.42872C3.47746 2.99749 4.76127 0.211779 6.30497 0V6.3208H6.32119ZM6.32119 6.6792V13C4.77749 12.7882 3.49369 10.0025 3.44494 6.6792H6.32119ZM6.67869 6.6792H9.55494C9.5062 10.0025 8.2224 12.7882 6.67869 13V6.6792ZM6.67869 6.3208V0C8.2224 0.211814 9.50619 2.99749 9.55494 6.3208H6.67869ZM5.21626 0.114035C3.9813 1.10777 3.10375 3.50251 3.07122 6.3208H0C0.0812725 3.24185 2.30748 0.700501 5.2162 0.114035H5.21626ZM5.80033e-05 6.6792H3.07128C3.10381 9.49747 3.98124 11.8922 5.21632 12.886C2.3076 12.2995 0.0813653 9.75815 0.000116007 6.6792H5.80033e-05ZM7.78374 12.886C9.0187 11.8922 9.89625 9.49749 9.92878 6.6792H13C12.9187 9.75815 10.6925 12.2995 7.7838 12.886H7.78374Z" fill="white"></path>
+                    </svg>
+
+                </a>
+            </div>
+
+            <div class="footer__copyright">
+                © Все права защищены,2023
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="js/app.min.js?_v=20230419211021"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+create TABLE author (
+       id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+       first_name VARCHAR(128) DEFAULT NULL,
+       last_name VARCHAR(128) DEFAULT NULL,
+       bio TEXT DEFAULT NULL);
