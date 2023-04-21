@@ -450,7 +450,7 @@ h6 {
 }
 
 .no-webp .main-hero::before{
-  background-image: url(../img/main/decor.png); }
+  background-image: url(../image/main/decor.png); }
 
 .main-hero::before {
   content: "";
@@ -588,7 +588,7 @@ h6 {
 }
 
 .no-webp .set::before{
-  background-image: url(../img/main/decor.png); }
+  background-image: url(../image/main/decor.png); }
 
 .set::before {
   content: "";
@@ -607,7 +607,7 @@ h6 {
 }
 
 .no-webp .set::after{
-  background-image: url(../img/main/decor.png); }
+  background-image: url(../image/main/decor.png); }
 
 .set::after {
   content: "";

@@ -13,7 +13,6 @@
     <header class="header">
         <div class="header__container">
             <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
-
             <button type="button" class="menu__icon icon-menu"><span></span></button>
             <div class="header__menu menu">
                 <nav class="menu__body">
@@ -25,7 +24,6 @@
                     </ul>
                 </nav>
             </div>
-
             <div class="header__right">
                 <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
                     <div class="langs__body">
@@ -42,7 +40,6 @@
                 </div>
                 <a th:href="@{/}" data-da=".menu__body, 480, last" class="btn btn-acent header__btn">[[#{button.cart}]]</a>
             </div>
-
         </div>
     </header>
     <main class="page-main">
@@ -52,8 +49,8 @@
                     <h1 class="main-title main-hero__title">[[#{slogan.book}]]<div class="title-group">[[#{slogan.message}]]</div>
                     </h1>
                     <div class="main-hero__desc">
-                        <p>Эти книги изменили ментальность более 100000&nbsp;тысячи людей. Представляешь?</p>
-                        <p>У меня получается при помощи письма достучаться в самые постойные места души и дать вектор из их внутренних проблем.</p>
+                        <p>[[#{info.imagine.part1}]]&nbsp;[[#{info.imagine.part2}]]</p>
+                        <p>[[#{info.give.vector}]]</p>
                     </div>
                 </div>
                 <div class="main-hero__img">
@@ -64,33 +61,31 @@
                 </div>
             </div>
         </section>
-
         <section id="main-author" class="section main-author">
             <div class="main-author__container">
                 <h2 class="section__title main-author__title">
-                    Привет, мой милый друг. <br>
-                    Добро пожаловать во Вселенную Доктора Исаенко.
+                    [[#{hello.guys}]] <br>
+                    [[#{welcome}]]
                 </h2>
-
                 <div class="main-author__text">
                     <p>
-                        Как ты? Как у тебя внутри? Тепло ли тебе, холодно? Ты сегодня ел? Не голоден? Как дела у твоих близких? Все ли у тебя хорошо? Мы ещё с тобой не знакомы, но я уверена, когда мы с тобой познакомимся ближе мы будем словно родственники знающие друг друга тысячи лет.
+                        [[#{how.are.you}]]
                     </p>
-                    <p>Позволь мне представиться. Меня зовут Светлана. Фамилия моя Исаенко. Я из Украины. Мой родной город Харьков.</p>
-                    <p>
-                        Я не умею готовить борщ и тебя я бы не угостила своими кулинарными шедеврами если нам довелось встретиться у меня на кухне, но у меня есть другой талант- умею лечить людей. Я врач психитар, психотерапевт. У меня три частных психиатрических клиники. Две в Харькове. Одна в Киеве. Кандидат медицинских наук. И ещё, Я пишу книги. Книги о жизни, любви и смерти, возвышенности и низменности человеческих душ и веры в Человечество. Это романы.
+                    <p>[[#{introduce.yourself}]]
                     </p>
                     <p>
-                        Но ты не подумай, это не заумные книги заумного врача, это книги, на примере героев которых я даю возможность немного посмотреть на свою жизнь под другим углом. Где-то с юмором. А где - то даже заглянуть честно внутрь себя…Если ты здесь и читаешь эти строки, значит ты уже мой адресат. И помни, мои книги всегда оказываются в нужный период времени нужно личности. Знаю, у тебя все будет очень хорошо. Ведь они психокинетические…
+                        [[#{cook.borscht}]]
+                    </p>
+                    <p>
+                        [[#{you.think}]]
                     </p>
                 </div>
             </div>
         </section>
         <section id="main-about" class="section main-about">
             <div class=" main-about__container">
-                <h2 class="section__title  main-about__title">О чем эти книги?</h2>
-                <p class="main-about__text">Каждый найдет свои ответы. Давай так, ты мне потом ответишь о чем они их прожив. Единственное, что скажу:</p>
-
+                <h2 class="section__title  main-about__title">[[#{about.books}]]</h2>
+                <p class="main-about__text">[[#{will.find}]]</p>
                 <div class="main-about__list">
                     <div class="main-about__item">
                         <div class="main-about__item-icon">
@@ -98,9 +93,9 @@
                                 <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
                             </svg>
                         </div>
-                        <h3 class="main-about__item-title">«Невыдуманный истории выдуманных людей»</h3>
+                        <h3 class="main-about__item-title">[[#{true.stories.quotes}]]</h3>
                         <p class="main-about__item-desc">
-                            Они о жизни. О низменности и возвышенности. (Только внимательно, там даже есть настоящий секс)…
+                            [[#{about.life}]]
                         </p>
                     </div>
                     <div class="main-about__item">
@@ -109,9 +104,9 @@
                                 <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
                             </svg>
                         </div>
-                        <h3 class="main-about__item-title">“Любовь Ч”</h3>
+                        <h3 class="main-about__item-title">[[#{love.ch.quotes}]]</h3>
                         <p class="main-about__item-desc">
-                            О Человечности. О гранях любви человека и о том, как война оголяла сущность Человека…
+                            [[#{about.humanity}]]
                         </p>
                     </div>
                     <div class="main-about__item">
@@ -120,9 +115,9 @@
                                 <path d="M104.082 51.8947L104.081 52.283C90.6194 52.2599 77.9309 53.5331 68.3478 55.8463L68.2187 55.8461C62.3913 57.2601 57.8525 61.7835 56.4186 67.606L56.4183 67.7351C53.9422 77.3103 52.6267 89.9938 52.7326 103.457L52.0852 103.456C52.1082 89.9934 50.8351 77.3048 48.5219 67.7216L48.5221 67.5924C47.1081 61.7651 42.4558 57.2259 36.7623 55.7922L36.6332 55.792C27.0581 53.3158 14.3747 52.0003 0.911946 52.1062L0.91239 51.8471L0.911708 51.7179L0.912152 51.4588C14.3742 51.4818 27.0627 50.2087 36.6458 47.8954L36.775 47.8957C42.6025 46.3525 47.1414 41.8293 48.5751 36.1358L48.5753 36.0067C51.0515 26.4315 52.367 13.748 52.2611 0.285113L52.9085 0.286222C52.8854 13.7484 54.1585 26.437 56.4718 36.0202L56.4716 36.1493C57.8855 41.9767 62.4089 46.5157 68.2313 47.9496L68.3604 47.9498C77.9356 50.426 90.619 51.7415 104.082 51.6356L104.082 51.8947Z" fill="#7A40ED" />
                             </svg>
                         </div>
-                        <h3 class="main-about__item-title">“Монстры с которыми мы живем” </h3>
+                        <h3 class="main-about__item-title">[[#{monsters.quotes}]] </h3>
                         <p class="main-about__item-desc">
-                            Про объюзивные отношения и по моему мнению их просто обязана прочесть каждая женщина.
+                            [[#{about.obuzivnye}]]
                         </p>
                     </div>
                 </div>
@@ -131,10 +126,9 @@
         <section id="main-books" class="section main-books">
             <div class="main-books__container">
                 <h3 class="main-books__subtitle">
-                    <span>Ну пожалуй все. Остановлю себя. Хочу дать тебе пространство. Обнимаю тебя всем сердцем</span>
+                    <span>[[#{well.perhaps}]]</span>
                 </h3>
-                <h2 class="section__title main-books__title">Добро пожаловать в удивительно ужасающе прекрасный мир книг Светлаы Исаенко</h2>
-
+                <h2 class="section__title main-books__title">[[#{welcome.body}]]</h2>
                 <div class="main-books__list">
                     <div class="main-books__item">
                         <div class="main-books__item-img" style="background-image: url(image/main/books/01.png);">
@@ -144,8 +138,8 @@
                             </picture>
                         </div>
                         <div class="main-books__item-group">
-                            <h3 class="main-books__item-title">Невыдуманный истории выдуманных людей</h3>
-                            <a href="" class="btn">Подробнее</a>
+                            <h3 class="main-books__item-title">[[#{true.stories}]]</h3>
+                            <a href="" class="btn">[[#{more}]]</a>
                         </div>
                     </div>
                     <div class="main-books__item">
@@ -156,20 +150,20 @@
                             </picture>
                         </div>
                         <div class="main-books__item-group">
-                            <h3 class="main-books__item-title">Монстры с которыми мы живем </h3>
-                            <a href="" class="btn">Подробнее</a>
+                            <h3 class="main-books__item-title">[[#{monsters}]] </h3>
+                            <a href="" class="btn">[[#{more}]]</a>
                         </div>
                     </div>
                     <div class="main-books__item">
                         <div class="main-books__item-img" style="background-image: url(image/main/books/03.png);">
                             <picture>
                                 <source th:srcset="@{/image/main/books/book-3.webp}" type="image/webp">
-                                <img th:src="@{img/main/books/book-3.png}" alt="">
+                                <img th:src="@{image/main/books/book-3.png}" alt="">
                             </picture>
                         </div>
                         <div class="main-books__item-group">
-                            <h3 class="main-books__item-title">Любовь Ч</h3>
-                            <a href="" class="btn">Подробнее</a>
+                            <h3 class="main-books__item-title">[[#{love.ch}]]</h3>
+                            <a href="" class="btn">[[#{more}]]</a>
                         </div>
                     </div>
                 </div>
@@ -177,10 +171,8 @@
         </section>
         <section class="section set">
             <div class="set__container">
-                <h2 class="section__title set__title">Воспользуйся выгодным предложением и купи три книги сразу</h2>
-                <p class="set__text">Хотите сэкономить до 20% на покупке книг? Купите три книги сразу и получите скидку!</p>
-
-
+                <h2 class="section__title set__title">[[#{take.advantage}]]</h2>
+                <p class="set__text">[[#{want.save}]]</p>
                 <div class="set__img">
                     <picture>
                         <source th:srcset="@{image/main/books/set.webp}" type="image/webp">
@@ -188,11 +180,11 @@
                     </picture>
                 </div>
 
-                <a href="" class="btn btn-acent">купить комплект книг</a>
+                <a href="" class="btn btn-acent">[[#{buy.set.books}]]</a>
             </div>
         </section>
         <section id="reviews" class="section reviews">
-            <h2 class="section__title reviews__title">отзывы о книгах</h2>
+            <h2 class="section__title reviews__title">[[#{book.reviews}]]</h2>
 
             <div class="reviews__slider swiper">
                 <div class="reviews__wrapper swiper-wrapper">
@@ -251,21 +243,17 @@
                 <div class="reviews__pagination"></div>
             </div>
         </section>
-
         <script>
-
         </script>
     </main>
     <footer class="footer">
         <div class="footer__container">
-            <a href="" class="footer__link">Офферта</a>
-
+            <a href="" class="footer__link">[[#{offer}]]</a>
             <div class="social">
                 <a href="https://www.facebook.com/dr.isaenko.clinic" class="social__item">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                         <path d="M13 2.15544C13 1.01036 11.9896 0 10.8446 0H2.15544C1.01036 0 0 1.01036 0 2.15544V10.8446C0 11.9896 1.01036 13 2.15544 13H6.53368V8.0829H4.9171V5.92746H6.53368V5.05181C6.53368 3.56995 7.6114 2.29015 8.95855 2.29015H10.7098V4.44559H8.95855C8.75648 4.44559 8.5544 4.64767 8.5544 5.05181V5.92746H10.7098V8.0829H8.5544V13H10.8446C11.9896 13 13 11.9896 13 10.8446V2.15544Z" fill="white"></path>
                     </svg>
-
                 </a>
                 <a href="https://instagram.com/dr.isaenko.clinic" class="social__item">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -281,12 +269,10 @@
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                         <path d="M12.9999 6.3208H9.92866C9.89613 3.50254 9.0187 1.10777 7.78362 0.114035C10.6923 0.700501 12.9186 3.24185 12.9998 6.3208H12.9999ZM6.32119 6.3208H3.42872C3.47746 2.99749 4.76127 0.211779 6.30497 0V6.3208H6.32119ZM6.32119 6.6792V13C4.77749 12.7882 3.49369 10.0025 3.44494 6.6792H6.32119ZM6.67869 6.6792H9.55494C9.5062 10.0025 8.2224 12.7882 6.67869 13V6.6792ZM6.67869 6.3208V0C8.2224 0.211814 9.50619 2.99749 9.55494 6.3208H6.67869ZM5.21626 0.114035C3.9813 1.10777 3.10375 3.50251 3.07122 6.3208H0C0.0812725 3.24185 2.30748 0.700501 5.2162 0.114035H5.21626ZM5.80033e-05 6.6792H3.07128C3.10381 9.49747 3.98124 11.8922 5.21632 12.886C2.3076 12.2995 0.0813653 9.75815 0.000116007 6.6792H5.80033e-05ZM7.78374 12.886C9.0187 11.8922 9.89625 9.49749 9.92878 6.6792H13C12.9187 9.75815 10.6925 12.2995 7.7838 12.886H7.78374Z" fill="white"></path>
                     </svg>
-
                 </a>
             </div>
-
             <div class="footer__copyright">
-                © Все права защищены,2023
+                [[#{all.rights.reserved}]]
             </div>
         </div>
     </footer>
