@@ -1420,7 +1420,7 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
   }
 
   .no-webp .main-hero::after{
-    background-image: url(../img/main/decor.png); }
+    background-image: url(../image/main/decor.png); }
 
   .main-hero::after {
     content: "";
@@ -1761,13 +1761,13 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
   }
 }
 
-.webp .main-hero::before{ background-image: url(../img/main/decor.webp); }
+.webp .main-hero::before{ background-image: url(../image/main/decor.webp); }
 
-.webp .set::before{ background-image: url(../img/main/decor.webp); }
+.webp .set::before{ background-image: url(../image/main/decor.webp); }
 
-.webp .set::after{ background-image: url(../img/main/decor.webp); }
+.webp .set::after{ background-image: url(../image/main/decor.webp); }
 
 @media (min-width: 96.875em){
 
-  .webp .main-hero::after{ background-image: url(../img/main/decor.webp); }
+  .webp .main-hero::after{ background-image: url(../image/main/decor.webp); }
 }
