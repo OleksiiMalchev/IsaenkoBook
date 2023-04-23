@@ -18,32 +18,30 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Table(name = "book")
+@Table(name = "customer_address")
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class CustomerAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "author_id")
-    private Long authorId;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "cover")
-    private String cover;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language")
-    private Language language;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "format")
-    private Format formatBook;
-    @Column(name = "price")
-    private BigDecimal price;
+    @Column(name = "customer_id")
+    private Long customerId;
+    @Column(name = "country")
+    private String country;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "postal_code")
+    private String postalCode;
+    @Column(name = "street")
+    private String street;
+    @Column(name = "house_number")
+    private String houseNumber;
     @ManyToOne
-    @JoinColumn(name = "author_id", insertable = false, updatable = false)
-    private Author author;
+    @JoinColumn(name = "customer_ID", insertable = false, updatable = false)
+    private Customer customer;
 }

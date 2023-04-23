@@ -1,19 +1,13 @@
 package com.isaenkobook.bookstore.config;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.RequestContextFilter;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import java.util.Locale;
 
@@ -27,8 +21,8 @@ public class MvcConfig implements WebMvcConfigurer {
         String messages = "messages";
         if("uk".equals(locale.getLanguage())){
             messages+="_uk";
-//        } else if ("ru".equals(locale.getLanguage())){
-//            messages+="_ru";
+        } else if ("ru".equals(locale.getLanguage())){
+            messages+="_ru";
         } else{
             messages+="_en";
         }

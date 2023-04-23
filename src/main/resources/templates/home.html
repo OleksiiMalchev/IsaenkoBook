@@ -17,25 +17,29 @@
             <div class="header__menu menu">
                 <nav class="menu__body">
                     <ul class="menu__list">
-                        <li class="menu__item goto"><a th:href="@{/main-author}" class="menu__link">[[#{button.about.author}]]</a></li>
-                        <li class="menu__item goto"><a th:href="@{/main-about}" class="menu__link">[[#{button.about.books}]]</a></li>
-                        <li class="menu__item goto"><a th:href="@{/main-books}" class="menu__link">[[#{button.buy.books}]]</a></li>
-                        <li class="menu__item goto"><a th:href="@{/reviews}" class="menu__link">[[#{button.reviews}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-author" class="menu__link" th:href="@{'#main-author'}">[[#{button.about.author}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-about" class="menu__link" th:href="@{'#main-about'}">[[#{button.about.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-books" class="menu__link" th:href="@{'#main-books'}">[[#{button.buy.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#reviews" class="menu__link" th:href="@{'#reviews'}">[[#{button.reviews}]]</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="header__right">
                 <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
                     <div class="langs__body">
-                        <button type="button" data-spoller class="langs__current">[[#{button.ukrainian}]]
-                            <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
-                                <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
-                            </svg>
-                        </button>
-                        <div class="langs__list">
-                            <a class="langs__item">[[#{button.russian}]]</a>
-                            <a class="langs__item">[[#{button.english}]]</a>
-                        </div>
+                        <form method="GET" action="/change-locale">
+                            <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.ukrainian}]]
+                                <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
+                                    <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
+                                </svg>
+                            </button>
+                            <div class="langs__list">
+                                <a class="langs__item">
+                                    <button type="submit" name="locale" value="message_ru" data-spoller class="langs__current">[[#{button.russian}]]</button></a>
+                                <a class="langs__item">
+                                    <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.english}]]</button></a>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <a th:href="@{/}" data-da=".menu__body, 480, last" class="btn btn-acent header__btn">[[#{button.cart}]]</a>
@@ -278,5 +282,6 @@
     </footer>
 </div>
 <script src="js/app.min.js?_v=20230419211021"></script>
+
 </body>
 </html>
