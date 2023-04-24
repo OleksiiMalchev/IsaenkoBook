@@ -2,12 +2,11 @@ package com.isaenkobook.bookstore.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
@@ -15,22 +14,23 @@ import java.util.Locale;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages_en");
+        Locale locale = LocaleContextHolder.getLocale();
+        String messages = "messages";
+        if("uk".equals(locale.getLanguage())){
+            messages+="_uk";
+        } else if ("ru".equals(locale.getLanguage())){
+            messages+="_ru";
+        } else{
+            messages+="_en";
+        }
+        messageSource.setBasename(messages);
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setDefaultLocale(Locale.UK);
         return messageSource;
     }
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        CookieLocaleResolver resolver = new CookieLocaleResolver();
-        resolver.setDefaultLocale(Locale.UK);
-        return resolver;
-    }
 
     @Bean
     public LocaleChangeInterceptor localeInterceptor() {

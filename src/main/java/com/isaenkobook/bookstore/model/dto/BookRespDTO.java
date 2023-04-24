@@ -18,4 +18,5 @@ public class BookRespDTO {
     private Language language;
     private Format formatBook;
     private BigDecimal price;
+    private String cover;
 }

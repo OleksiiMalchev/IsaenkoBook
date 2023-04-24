@@ -1,25 +1,30 @@
 package com.isaenkobook.bookstore.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Locale;
+import java.util.Set;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    ResourceBundleMessageSource messageSource;
+
     @GetMapping("/main")
     public String home(Model model, HttpServletRequest request) {
-        Locale currentLocale = request.getLocale();
-        String countryCode = currentLocale.getCountry();
-        String countryName = currentLocale.getDisplayCountry();
-        String language = currentLocale.getLanguage();
-        String displayCountry = currentLocale.getDisplayCountry();
-
-        System.out.println(countryCode + ":" + countryName);
-        System.out.println(language + ":" + displayCountry);
-
         return "home";
+    }
+
+    @GetMapping("/change-locale")
+    public String changeLocale(@RequestParam("locale") String locale) {
+        Set<String> basenameSet = messageSource.getBasenameSet();
+        messageSource.setBasename(locale);
+        return "redirect:/main";
     }
 }

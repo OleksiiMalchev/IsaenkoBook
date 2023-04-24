@@ -16,5 +16,6 @@ public class BookReqDTO {
     private Long authorId;
     private Language language;
     private Format formatBook;
+    private String cover;
     private BigDecimal price;
 }

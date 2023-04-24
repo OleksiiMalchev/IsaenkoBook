@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class AuthorRespDTO {
-    private Long id;
+    private Long authorId;
     private String firstName;
     private String lastName;
     private String bio;

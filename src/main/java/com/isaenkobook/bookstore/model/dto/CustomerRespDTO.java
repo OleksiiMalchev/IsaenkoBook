@@ -4,15 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Builder
-public class AuthorWithBooksRespDTO {
-    private Long id;
+public class CustomerRespDTO {
+    private Long customerId;
     private String firstName;
+    private String middleName;
     private String lastName;
-    private String bio;
-    private List<BookRespDTO> listBooks;
+    private String mobile;
+    private String email;
 }
