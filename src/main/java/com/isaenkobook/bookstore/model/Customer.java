@@ -36,6 +36,8 @@ public class Customer {
     private String lastName;
     @Column(name = "mobile")
     private String mobile;
+    @Column(name="email")
+    private String email;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Order> orders;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
