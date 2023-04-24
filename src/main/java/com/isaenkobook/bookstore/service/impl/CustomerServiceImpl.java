@@ -1,7 +1,6 @@
 package com.isaenkobook.bookstore.service.impl;
 
 import com.isaenkobook.bookstore.mapper.CustomerMapper;
-import com.isaenkobook.bookstore.model.Author;
 import com.isaenkobook.bookstore.model.Customer;
 import com.isaenkobook.bookstore.model.dto.CustomerReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerRespDTO;
@@ -25,7 +24,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerRespDTO> findCustomers() {
-        return customerRepository.findAll().stream().map(customerMapper::toCustomerRespDTO).toList();
+        return customerRepository.findAll()
+                .stream()
+                .map(customerMapper::toCustomerRespDTO).toList();
     }
 
     @Override

@@ -18,12 +18,15 @@ public class CustomerMapper {
     }
 
     public CustomerRespDTO toCustomerRespDTO(Customer customer) {
-        return CustomerRespDTO.builder().customerId(customer.getId())
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .middleName(customer.getMiddleName())
-                .email(customer.getEmail())
-                .mobile(customer.getMobile())
-                .build();
+        if(customer!=null){
+            return CustomerRespDTO.builder().customerId(customer.getId())
+                    .firstName(customer.getFirstName())
+                    .lastName(customer.getLastName())
+                    .middleName(customer.getMiddleName())
+                    .email(customer.getEmail())
+                    .mobile(customer.getMobile())
+                    .build();
+        }
+        return null;
     }
 }
