@@ -1,19 +1,30 @@
 package com.isaenkobook.bookstore.service;
 
-import com.isaenkobook.bookstore.model.dto.BookRespDTO;
+import com.isaenkobook.bookstore.model.CartItem;
+import com.isaenkobook.bookstore.model.dto.CartItemReqDTO;
+import com.isaenkobook.bookstore.model.dto.CartItemRespDTO;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
-import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
+
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public interface CartService {
-    void addItem(Long bookId);
+    void addItem(CartItemReqDTO cartItemRequestDTO);
+
+    void updateItem(CartItemReqDTO cartItemRequestDTO);
+    String getTotalPrice();
 
     void removeItem(Long bookId);
 
-    Map<BookRespDTO, Integer> getItems();
+    List<CartItemRespDTO> getCartItems();
 
-    BigDecimal getTotal();
+    void clearCart();
 
-    void clear();
+    void orderFormation();
+
+
 }
