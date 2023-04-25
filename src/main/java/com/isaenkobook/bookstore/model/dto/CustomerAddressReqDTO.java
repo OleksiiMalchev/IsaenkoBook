@@ -8,10 +8,10 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CustomerAddressReqDTO {
+
     private Long customerId;
     private String country;
     private String city;
-    private String postalCode;
-    private String street;
-    private String houseNumber;
+    private String address;
+    private String postOffice;
 }

@@ -13,7 +13,13 @@ import java.util.Optional;
 public interface OrderService {
     List<OrderRespDTO> findOrders();
 
-    Optional<OrderRespDTO> findOrderById(Long orderId);
+    List<OrderRespDTO> findOrdersByCustomerId(Long customerId);
+
+    List<OrderRespDTO> findOrderByStatus(String statusName);
+
+    Optional<OrderRespDTO> findOrdersById(Long orderId);
+
+    Optional<OrderRespDTO> findOrdersByCustomerIdAndStatus(Long customerId, String statusName);
 
     OrderRespDTO createOrder(Long customerId);
 

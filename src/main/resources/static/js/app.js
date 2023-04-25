@@ -216,6 +216,23 @@
         bodyUnlock();
         document.documentElement.classList.remove("menu-open");
     }
+    function cartInit() {
+        if (document.querySelector(".cart")) document.addEventListener("click", (function(e) {
+            if (bodyLockStatus && e.target.closest(".cart")) {
+                e.preventDefault();
+                cartOpen();
+            }
+            if (bodyLockStatus && e.target.closest(".cart-info__close")) cartClose();
+        }));
+    }
+    function cartOpen() {
+        bodyLock();
+        document.documentElement.classList.add("cart-open");
+    }
+    function cartClose() {
+        bodyUnlock();
+        document.documentElement.classList.remove("cart-open");
+    }
     function functions_FLS(message) {
         setTimeout((() => {
             if (window.FLS) console.log(message);
@@ -264,6 +281,252 @@
             }
         }
     }
+    class modal {
+        constructor(options) {
+            let config = {
+                logging: true,
+                init: true,
+                attributeOpenButton: "data-modal",
+                attributeCloseButton: "data-close",
+                fixElementSelector: "[data-lp]",
+                youtubeAttribute: "data-modal-youtube",
+                youtubePlaceAttribute: "data-modal-youtube-place",
+                setAutoplayYoutube: true,
+                classes: {
+                    modal: "modal",
+                    modalContent: "modal__content",
+                    modalActive: "modal_show",
+                    bodyActive: "modal-show"
+                },
+                focusCatch: true,
+                closeEsc: true,
+                bodyLock: true,
+                hashSettings: {
+                    location: true,
+                    goHash: true
+                },
+                on: {
+                    beforeOpen: function() {},
+                    afterOpen: function() {},
+                    beforeClose: function() {},
+                    afterClose: function() {}
+                }
+            };
+            this.youTubeCode;
+            this.isOpen = false;
+            this.targetOpen = {
+                selector: false,
+                element: false
+            };
+            this.previousOpen = {
+                selector: false,
+                element: false
+            };
+            this.lastClosed = {
+                selector: false,
+                element: false
+            };
+            this._dataValue = false;
+            this.hash = false;
+            this._reopen = false;
+            this._selectorOpen = false;
+            this.lastFocusEl = false;
+            this._focusEl = [ "a[href]", 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', "button:not([disabled]):not([aria-hidden])", "select:not([disabled]):not([aria-hidden])", "textarea:not([disabled]):not([aria-hidden])", "area[href]", "iframe", "object", "embed", "[contenteditable]", '[tabindex]:not([tabindex^="-"])' ];
+            this.options = {
+                ...config,
+                ...options,
+                classes: {
+                    ...config.classes,
+                    ...options?.classes
+                },
+                hashSettings: {
+                    ...config.hashSettings,
+                    ...options?.hashSettings
+                },
+                on: {
+                    ...config.on,
+                    ...options?.on
+                }
+            };
+            this.bodyLock = false;
+            this.options.init ? this.initmodals() : null;
+        }
+        initmodals() {
+            this.modalLogging(`Прокинувся`);
+            this.eventsmodal();
+        }
+        eventsmodal() {
+            document.addEventListener("click", function(e) {
+                const buttonOpen = e.target.closest(`[${this.options.attributeOpenButton}]`);
+                if (buttonOpen) {
+                    e.preventDefault();
+                    this._dataValue = buttonOpen.getAttribute(this.options.attributeOpenButton) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
+                    this.youTubeCode = buttonOpen.getAttribute(this.options.youtubeAttribute) ? buttonOpen.getAttribute(this.options.youtubeAttribute) : null;
+                    if ("error" !== this._dataValue) {
+                        if (!this.isOpen) this.lastFocusEl = buttonOpen;
+                        this.targetOpen.selector = `${this._dataValue}`;
+                        this._selectorOpen = true;
+                        this.open();
+                        return;
+                    } else this.modalLogging(`Йой, не заповнено атрибут у ${buttonOpen.classList}`);
+                    return;
+                }
+                const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
+                if (buttonClose || !e.target.closest(`.${this.options.classes.modalContent}`) && this.isOpen) {
+                    e.preventDefault();
+                    this.close();
+                    return;
+                }
+            }.bind(this));
+            document.addEventListener("keydown", function(e) {
+                if (this.options.closeEsc && 27 == e.which && "Escape" === e.code && this.isOpen) {
+                    e.preventDefault();
+                    this.close();
+                    return;
+                }
+                if (this.options.focusCatch && 9 == e.which && this.isOpen) {
+                    this._focusCatch(e);
+                    return;
+                }
+            }.bind(this));
+            if (this.options.hashSettings.goHash) {
+                window.addEventListener("hashchange", function() {
+                    if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
+                }.bind(this));
+                window.addEventListener("load", function() {
+                    if (window.location.hash) this._openToHash();
+                }.bind(this));
+            }
+        }
+        open(selectorValue) {
+            if (bodyLockStatus) {
+                this.bodyLock = document.documentElement.classList.contains("lock") && !this.isOpen ? true : false;
+                if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) {
+                    this.targetOpen.selector = selectorValue;
+                    this._selectorOpen = true;
+                }
+                if (this.isOpen) {
+                    this._reopen = true;
+                    this.close();
+                }
+                if (!this._selectorOpen) this.targetOpen.selector = this.lastClosed.selector;
+                if (!this._reopen) this.previousActiveElement = document.activeElement;
+                this.targetOpen.element = document.querySelector(this.targetOpen.selector);
+                if (this.targetOpen.element) {
+                    if (this.youTubeCode) {
+                        const codeVideo = this.youTubeCode;
+                        const urlVideo = `https://www.youtube.com/embed/${codeVideo}?rel=0&showinfo=0&autoplay=1`;
+                        const iframe = document.createElement("iframe");
+                        iframe.setAttribute("allowfullscreen", "");
+                        const autoplay = this.options.setAutoplayYoutube ? "autoplay;" : "";
+                        iframe.setAttribute("allow", `${autoplay}; encrypted-media`);
+                        iframe.setAttribute("src", urlVideo);
+                        if (!this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) {
+                            this.targetOpen.element.querySelector(".modal__text").setAttribute(`${this.options.youtubePlaceAttribute}`, "");
+                        }
+                        this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
+                    }
+                    if (this.options.hashSettings.location) {
+                        this._getHash();
+                        this._setHash();
+                    }
+                    this.options.on.beforeOpen(this);
+                    document.dispatchEvent(new CustomEvent("beforemodalOpen", {
+                        detail: {
+                            modal: this
+                        }
+                    }));
+                    this.targetOpen.element.classList.add(this.options.classes.modalActive);
+                    document.documentElement.classList.add(this.options.classes.bodyActive);
+                    if (!this._reopen) !this.bodyLock ? bodyLock() : null; else this._reopen = false;
+                    this.targetOpen.element.setAttribute("aria-hidden", "false");
+                    this.previousOpen.selector = this.targetOpen.selector;
+                    this.previousOpen.element = this.targetOpen.element;
+                    this._selectorOpen = false;
+                    this.isOpen = true;
+                    setTimeout((() => {
+                        this._focusTrap();
+                    }), 50);
+                    this.options.on.afterOpen(this);
+                    document.dispatchEvent(new CustomEvent("aftermodalOpen", {
+                        detail: {
+                            modal: this
+                        }
+                    }));
+                    this.modalLogging(`Відкрив попап`);
+                } else this.modalLogging(`Йой, такого попапу немає. Перевірте коректність введення. `);
+            }
+        }
+        close(selectorValue) {
+            if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) this.previousOpen.selector = selectorValue;
+            if (!this.isOpen || !bodyLockStatus) return;
+            this.options.on.beforeClose(this);
+            document.dispatchEvent(new CustomEvent("beforemodalClose", {
+                detail: {
+                    modal: this
+                }
+            }));
+            if (this.youTubeCode) if (this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).innerHTML = "";
+            this.previousOpen.element.classList.remove(this.options.classes.modalActive);
+            this.previousOpen.element.setAttribute("aria-hidden", "true");
+            if (!this._reopen) {
+                document.documentElement.classList.remove(this.options.classes.bodyActive);
+                !this.bodyLock ? bodyUnlock() : null;
+                this.isOpen = false;
+            }
+            this._removeHash();
+            if (this._selectorOpen) {
+                this.lastClosed.selector = this.previousOpen.selector;
+                this.lastClosed.element = this.previousOpen.element;
+            }
+            this.options.on.afterClose(this);
+            document.dispatchEvent(new CustomEvent("aftermodalClose", {
+                detail: {
+                    modal: this
+                }
+            }));
+            setTimeout((() => {
+                this._focusTrap();
+            }), 50);
+            this.modalLogging(`Закрив попап`);
+        }
+        _getHash() {
+            if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
+        }
+        _openToHash() {
+            let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
+            const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
+            this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ? buttons.getAttribute(this.options.youtubeAttribute) : null;
+            if (buttons && classInHash) this.open(classInHash);
+        }
+        _setHash() {
+            history.pushState("", "", this.hash);
+        }
+        _removeHash() {
+            history.pushState("", "", window.location.href.split("#")[0]);
+        }
+        _focusCatch(e) {
+            const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
+            const focusArray = Array.prototype.slice.call(focusable);
+            const focusedIndex = focusArray.indexOf(document.activeElement);
+            if (e.shiftKey && 0 === focusedIndex) {
+                focusArray[focusArray.length - 1].focus();
+                e.preventDefault();
+            }
+            if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+                focusArray[0].focus();
+                e.preventDefault();
+            }
+        }
+        _focusTrap() {
+            const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
+            if (!this.isOpen && this.lastFocusEl) this.lastFocusEl.focus(); else focusable[0].focus();
+        }
+        modalLogging(message) {
+            this.options.logging ? functions_FLS(`[Попапос]: ${message}`) : null;
+        }
+    }
+    modules_flsModules.modal = new modal({});
     let gotoblock_gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
         const targetBlockElement = document.querySelector(targetBlock);
         if (targetBlockElement) {
@@ -302,6 +565,144 @@
             functions_FLS(`[gotoBlock]: Юхуу...їдемо до ${targetBlock}`);
         } else functions_FLS(`[gotoBlock]: Йой... Такого блоку немає на сторінці: ${targetBlock}`);
     };
+    function formFieldsInit(options = {
+        viewPass: false,
+        autoHeight: false
+    }) {
+        document.body.addEventListener("focusin", (function(e) {
+            const targetElement = e.target;
+            if ("INPUT" === targetElement.tagName || "TEXTAREA" === targetElement.tagName) {
+                if (!targetElement.hasAttribute("data-no-focus-classes")) {
+                    targetElement.classList.add("_form-focus");
+                    targetElement.parentElement.classList.add("_form-focus");
+                }
+                formValidate.removeError(targetElement);
+                targetElement.hasAttribute("data-validate") ? formValidate.removeError(targetElement) : null;
+            }
+        }));
+        document.body.addEventListener("focusout", (function(e) {
+            const targetElement = e.target;
+            if ("INPUT" === targetElement.tagName || "TEXTAREA" === targetElement.tagName) {
+                if (!targetElement.hasAttribute("data-no-focus-classes")) {
+                    targetElement.classList.remove("_form-focus");
+                    targetElement.parentElement.classList.remove("_form-focus");
+                }
+                targetElement.hasAttribute("data-validate") ? formValidate.validateInput(targetElement) : null;
+            }
+        }));
+        if (options.viewPass) document.addEventListener("click", (function(e) {
+            let targetElement = e.target;
+            if (targetElement.closest('[class*="__viewpass"]')) {
+                let inputType = targetElement.classList.contains("_viewpass-active") ? "password" : "text";
+                targetElement.parentElement.querySelector("input").setAttribute("type", inputType);
+                targetElement.classList.toggle("_viewpass-active");
+            }
+        }));
+        if (options.autoHeight) {
+            const textareas = document.querySelectorAll("textarea[data-autoheight]");
+            if (textareas.length) {
+                textareas.forEach((textarea => {
+                    const startHeight = textarea.hasAttribute("data-autoheight-min") ? Number(textarea.dataset.autoheightMin) : Number(textarea.offsetHeight);
+                    const maxHeight = textarea.hasAttribute("data-autoheight-max") ? Number(textarea.dataset.autoheightMax) : 1 / 0;
+                    setHeight(textarea, Math.min(startHeight, maxHeight));
+                    textarea.addEventListener("input", (() => {
+                        if (textarea.scrollHeight > startHeight) {
+                            textarea.style.height = `auto`;
+                            setHeight(textarea, Math.min(Math.max(textarea.scrollHeight, startHeight), maxHeight));
+                        }
+                    }));
+                }));
+                function setHeight(textarea, height) {
+                    textarea.style.height = `${height}px`;
+                }
+            }
+        }
+    }
+    let formValidate = {
+        getErrors(form) {
+            let error = 0;
+            let formRequiredItems = form.querySelectorAll("*[data-required]");
+            if (formRequiredItems.length) formRequiredItems.forEach((formRequiredItem => {
+                if ((null !== formRequiredItem.offsetParent || "SELECT" === formRequiredItem.tagName) && !formRequiredItem.disabled) error += this.validateInput(formRequiredItem);
+            }));
+            return error;
+        },
+        validateInput(formRequiredItem) {
+            let error = 0;
+            if ("email" === formRequiredItem.dataset.required) {
+                formRequiredItem.value = formRequiredItem.value.replace(" ", "");
+                if (this.emailTest(formRequiredItem)) {
+                    this.addError(formRequiredItem);
+                    error++;
+                } else this.removeError(formRequiredItem);
+            } else if ("checkbox" === formRequiredItem.type && !formRequiredItem.checked) {
+                this.addError(formRequiredItem);
+                error++;
+            } else if (!formRequiredItem.value.trim()) {
+                this.addError(formRequiredItem);
+                error++;
+            } else this.removeError(formRequiredItem);
+            return error;
+        },
+        addError(formRequiredItem) {
+            formRequiredItem.classList.add("_form-error");
+            formRequiredItem.parentElement.classList.add("_form-error");
+            let inputError = formRequiredItem.parentElement.querySelector(".form__error");
+            if (inputError) formRequiredItem.parentElement.removeChild(inputError);
+            if (formRequiredItem.dataset.error) formRequiredItem.parentElement.insertAdjacentHTML("beforeend", `<div class="form__error">${formRequiredItem.dataset.error}</div>`);
+        },
+        removeError(formRequiredItem) {
+            formRequiredItem.classList.remove("_form-error");
+            formRequiredItem.parentElement.classList.remove("_form-error");
+            if (formRequiredItem.parentElement.querySelector(".form__error")) formRequiredItem.parentElement.removeChild(formRequiredItem.parentElement.querySelector(".form__error"));
+        },
+        formClean(form) {
+            form.reset();
+            setTimeout((() => {
+                let inputs = form.querySelectorAll("input,textarea");
+                for (let index = 0; index < inputs.length; index++) {
+                    const el = inputs[index];
+                    el.parentElement.classList.remove("_form-focus");
+                    el.classList.remove("_form-focus");
+                    formValidate.removeError(el);
+                }
+                let checkboxes = form.querySelectorAll(".checkbox__input");
+                if (checkboxes.length > 0) for (let index = 0; index < checkboxes.length; index++) {
+                    const checkbox = checkboxes[index];
+                    checkbox.checked = false;
+                }
+                if (modules_flsModules.select) {
+                    let selects = form.querySelectorAll(".select");
+                    if (selects.length) for (let index = 0; index < selects.length; index++) {
+                        const select = selects[index].querySelector("select");
+                        modules_flsModules.select.selectBuild(select);
+                    }
+                }
+            }), 0);
+        },
+        emailTest(formRequiredItem) {
+            return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(formRequiredItem.value);
+        }
+    };
+    function formQuantity() {
+        document.addEventListener("click", (function(e) {
+            let targetElement = e.target;
+            if (targetElement.closest("[data-quantity-plus]") || targetElement.closest("[data-quantity-minus]")) {
+                const valueElement = targetElement.closest("[data-quantity]").querySelector("[data-quantity-value]");
+                let value = parseInt(valueElement.value);
+                if (targetElement.hasAttribute("data-quantity-plus")) {
+                    value++;
+                    if (+valueElement.dataset.quantityMax && +valueElement.dataset.quantityMax < value) value = valueElement.dataset.quantityMax;
+                } else {
+                    --value;
+                    if (+valueElement.dataset.quantityMin) {
+                        if (+valueElement.dataset.quantityMin > value) value = valueElement.dataset.quantityMin;
+                    } else if (value < 1) value = 1;
+                }
+                targetElement.closest("[data-quantity]").querySelector("[data-quantity-value]").value = value;
+            }
+        }));
+    }
     function ssr_window_esm_isObject(obj) {
         return null !== obj && "object" === typeof obj && "constructor" in obj && obj.constructor === Object;
     }
@@ -3803,9 +4204,145 @@
     }
     const da = new DynamicAdapt("max");
     da.init();
+    const booksVersionBtn = document.querySelectorAll(".btn-version-js"), booksVersionList = document.querySelectorAll(".book-version__dropdown");
+    booksVersionList.forEach((el => {
+        el.setAttribute("hidden", "hidden");
+    }));
+    booksVersionBtn.forEach((el => {
+        el.addEventListener("click", (function(e) {
+            e.preventDefault();
+            el.classList.toggle("open");
+            const g = el.closest(".book-version__group").querySelector(".book-version__dropdown");
+            _slideToggle(g);
+        }));
+    }));
+    const page = document.querySelector(".page-book");
+    if (page) page.closest("body").querySelector(".header").style.color = "#fff";
+    const pageOrder = document.querySelector(".page-order");
+    if (pageOrder) pageOrder.closest("body").querySelector(".header").style.position = "relative";
+    let stars = [];
+    function createStar() {
+        let star = document.createElement("div");
+        star.style.width = "3px";
+        star.style.height = "3px";
+        star.style.borderRadius = "50%";
+        star.style.backgroundColor = "white";
+        star.style.position = "absolute";
+        star.style.top = Math.random() * window.innerHeight + "px";
+        star.style.left = Math.random() * window.innerWidth + "px";
+        star.speed = 10 * Math.random() + 1;
+        return star;
+    }
+    function addStars() {
+        for (let i = 0; i < 75; i++) {
+            let star = createStar();
+            stars.push(star);
+            const wrapper = document.querySelector(".book-hero");
+            if (wrapper) wrapper.append(star);
+        }
+    }
+    function flicker() {
+        for (let i = 0; i < stars.length; i++) stars[i].style.opacity = Math.random();
+    }
+    function moveStars() {
+        for (let i = 0; i < stars.length; i++) {
+            let star = stars[i];
+            star.style.top = parseFloat(star.style.top) - star.speed + "px";
+            if (parseFloat(star.style.top) + star.offsetHeight < 0) {
+                star.style.top = window.innerHeight + "px";
+                star.style.left = Math.random() * window.innerWidth + "px";
+                star.speed = 10 * Math.random() + 1;
+            }
+        }
+    }
+    addStars();
+    setInterval(flicker, 100);
+    setInterval(moveStars, 50);
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-btn"), cartItemsList = document.querySelector(".cart-info__body"), cartTotal = document.querySelector(".cart-info__total-value"), removeAllCartButtons = document.querySelector(".cart-info__clear");
+    addToCartButtons.forEach((button => {
+        button.addEventListener("click", addToCart);
+    }));
+    removeAllCartButtons.addEventListener("click", removeAllFromCart);
+    let cartItems = [];
+    function addToCart(event) {
+        event.preventDefault();
+        const button = event.target, name = button.getAttribute("data-book-name"), price = button.getAttribute("data-book-price"), version = button.getAttribute("data-book-version"), image = button.getAttribute("data-book-img"), quantity = 1;
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-info__item");
+        cartItem.innerHTML = `\n            <div class="cart-info__img">\n                <img src=${image} alt="${name}">\n            </div>\n            <div class="cart-info__details">\n                <h4 class="cart-info__book">${name}</h4>\n                <div class="cart-info__price">${price}</div>\n                <div class="cart-info__version">${version}</div>\n\n                <div class="cart-info__quantity">\n                    <button type="button" class="cart-info__quantity-button cart-info__quantity-button-minus"></button>\n                    <input class="cart-info__quantity-input" type="text" name="form[]" value="${quantity}">\n                    <button type="button" class="cart-info__quantity-button cart-info__quantity-button-plus"></button>\n                </div>\n\n            </div>\n            <div class="cart-info__del">\n                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">\n                    <path d="M0.31938 0.319383C0.745221 -0.106461 1.43542 -0.106461 1.86104 0.319383L7 5.45838L12.139 0.319383C12.5648 -0.106461 13.255 -0.106461 13.6806 0.319383C14.1065 0.745226 14.1065 1.43543 13.6806 1.86105L8.54166 7.00005L13.6806 12.139C14.1065 12.5649 14.1065 13.2551 13.6806 13.6807C13.2548 14.1066 12.5646 14.1063 12.139 13.6807L7 8.54171L1.86104 13.6807C1.4352 14.1063 0.744994 14.1063 0.31938 13.6807C-0.10646 13.2549 -0.10646 12.5647 0.31938 12.139L5.45834 7.00005L0.31938 1.86105C-0.10646 1.43521 -0.10646 0.744999 0.31938 0.319383Z" fill="#BDBDBD"/>\n                </svg>\n            </div>\n        `;
+        cartItemsList.appendChild(cartItem);
+        cartItems.push(cartItem);
+        countItemsInCart(cartItems);
+        updateCartTotal();
+        const removeFromCartButtons = document.querySelectorAll(".cart-info__del");
+        removeFromCartButtons.forEach((button => {
+            button.addEventListener("click", removeFromCart);
+        }));
+        const plusBtns = document.querySelectorAll(".cart-info__quantity-button-plus");
+        const minusBtns = document.querySelectorAll(".cart-info__quantity-button-minus");
+        plusBtns.forEach((button => {
+            button.addEventListener("click", increaseQuantity);
+        }));
+        minusBtns.forEach((button => {
+            button.addEventListener("click", decreaseQuantity);
+        }));
+    }
+    function updateCartTotal() {
+        let total = 0;
+        cartItemsList.querySelectorAll(".cart-info__item").forEach((item => {
+            const price = item.querySelector(".cart-info__price").innerText;
+            const quantity = item.querySelector(".cart-info__quantity-input").value;
+            total += price * quantity;
+        }));
+        cartTotal.innerText = `${total}`;
+    }
+    function removeAllFromCart() {
+        const cartAllItems = document.querySelectorAll(".cart-info__item");
+        cartAllItems.forEach((cartItem => {
+            cartItem.remove();
+        }));
+        cartItems.length = 0;
+        updateCartTotal();
+        countItemsInCart(cartItems);
+    }
+    function removeFromCart() {
+        const cartItem = this.closest(".cart-info__item");
+        cartItem.remove();
+        updateCartTotal();
+        cartItems.length--;
+        countItemsInCart(cartItems);
+    }
+    function increaseQuantity() {
+        var input = this.previousElementSibling;
+        var value = input.value;
+        value++;
+        input.value = value;
+        updateCartTotal();
+    }
+    function decreaseQuantity() {
+        var input = this.nextElementSibling;
+        var value = parseInt(input.value);
+        if (value > 1) {
+            value--;
+            input.value = value;
+        }
+        updateCartTotal();
+    }
+    function countItemsInCart(cartItems) {
+        const cartQuantityCount = document.querySelector(".cart__quantity");
+        const cartAllQuantity = document.querySelector(".cart-info__allquantity-total");
+        cartQuantityCount.innerText = `(${cartItems.length})`;
+        cartAllQuantity.innerText = `${cartItems.length} шт`;
+    }
     window["FLS"] = true;
     isWebp();
     menuInit();
+    cartInit();
     spollers();
+    formFieldsInit({
+        viewPass: false,
+        autoHeight: false
+    });
+    formQuantity();
     pageNavigation();
 })();

@@ -2,8 +2,6 @@ package com.isaenkobook.bookstore.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,8 +13,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Table(name = "customer_address")
 @Entity
@@ -35,12 +31,10 @@ public class CustomerAddress {
     private String country;
     @Column(name = "city")
     private String city;
-    @Column(name = "postal_code")
-    private String postalCode;
-    @Column(name = "street")
-    private String street;
-    @Column(name = "house_number")
-    private String houseNumber;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "post_office")
+    private String postOffice;
     @ManyToOne
     @JoinColumn(name = "customer_ID", insertable = false, updatable = false)
     private Customer customer;

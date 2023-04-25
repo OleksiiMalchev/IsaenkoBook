@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
-    public Book toBook(BookReqDTO bookReqDto) {
+    public Book toBook(BookReqDTO bookReqDTO) {
         return Book.builder()
-                .title(bookReqDto.getTitle())
-                .authorId(bookReqDto.getAuthorId())
-                .cover(bookReqDto.getCover())
-                .formatBook(bookReqDto.getFormatBook())
-                .language(bookReqDto.getLanguage())
-                .price(bookReqDto.getPrice())
+                .title(bookReqDTO.getTitle())
+                .authorId(bookReqDTO.getAuthorId())
+                .cover(bookReqDTO.getCover())
+                .formatBook(bookReqDTO.getFormatBook())
+                .language(bookReqDTO.getLanguage())
+                .price(bookReqDTO.getPrice())
                 .build();
     }
 
