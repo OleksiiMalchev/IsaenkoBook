@@ -28,21 +28,21 @@ public class CustomerController {
 
 
     @GetMapping("/customers")
-    public ResponseEntity<? super CustomerRespDTO> findAuthors() {
+    public ResponseEntity<? super CustomerRespDTO> findCustomers() {
         List<CustomerRespDTO> customers = customerService.findCustomers();
         return customers.isEmpty() ? new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND) :
                 ResponseEntity.status(200).body(customers);
     }
 
     @GetMapping("/customers/{id}")
-    public ResponseEntity<? super AuthorRespDTO> findAuthorById(@PathVariable("id") Long customerId) {
+    public ResponseEntity<? super CustomerRespDTO> findCustomerById(@PathVariable("id") Long customerId) {
         Optional<CustomerRespDTO> customerById = customerService.findCustomerById(customerId);
         return customerById .isPresent() ? ResponseEntity.status(200).body(customerById ) :
                 new ResponseEntity<>("Customer with id:" + customerId + " not found", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<? super AuthorRespDTO> createAuthor(@RequestBody CustomerReqDTO customerReqDTO) {
+    public ResponseEntity<? super CustomerRespDTO> createCustomer(@RequestBody CustomerReqDTO customerReqDTO) {
         if (customerReqDTO == null) {
             return new ResponseEntity<>("Request cannot be empty", HttpStatus.BAD_REQUEST);
 
@@ -52,7 +52,7 @@ public class CustomerController {
     }
 
     @PutMapping("/customers/{id}")
-    public ResponseEntity<? super AuthorRespDTO> updateAuthor(@RequestBody Map<Object, Object> fields,
+    public ResponseEntity<? super AuthorRespDTO> updateCustomer(@RequestBody Map<Object, Object> fields,
                                                               @PathVariable("id") Long customerId) {
         CustomerRespDTO customerRespDTO = customerService.updateCustomer(fields, customerId);
         return ResponseEntity.status(200).body(customerRespDTO);
@@ -60,7 +60,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<String> deleteAuthor(@PathVariable("id") Long customerId) {
+    public ResponseEntity<String> deleteCustomer(@PathVariable("id") Long customerId) {
         return customerService.deleteCustomer(customerId)? new ResponseEntity<String>("Customer with id: " +
                 customerId + " deleted", HttpStatus.OK) : new ResponseEntity<String>("Customer with id: " +
                 customerId + " does not exist", HttpStatus.NO_CONTENT);

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>OrderPage</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/css/style.min.css?_v=20230424235853}"/>
+    <link rel="shortcut icon" th:href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__container">
+            <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
+            <button type="button" class="menu__icon icon-menu"><span></span></button>
+            <div class="header__menu menu">
+                <nav class="menu__body">
+                    <ul class="menu__list">
+                        <li class="menu__item goto"><a href="#main-author" class="menu__link" th:href="@{'#main-author'}">[[#{button.about.author}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-about" class="menu__link" th:href="@{'#main-about'}">[[#{button.about.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-books" class="menu__link" th:href="@{'#main-books'}">[[#{button.buy.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#reviews" class="menu__link" th:href="@{'#reviews'}">[[#{button.reviews}]]</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="header__right">
+                <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
+                    <div class="langs__body">
+                        <form method="GET" action="/change-locale">
+                            <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.ukrainian}]]
+                                <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
+                                    <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
+                                </svg>
+                            </button>
+                            <div class="langs__list">
+                                <a class="langs__item">
+                                    <button type="submit" name="locale" value="message_ru" data-spoller class="langs__current">[[#{button.russian}]]</button></a>
+                                <a class="langs__item">
+                                    <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.english}]]</button></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <a href="" class="header__cart cart">
+                    <span>корзина</span>
+                    <div class="cart__quantity"></div>
+                    <div class="cart__icon">
+                        <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.9385 4.12224L17.7957 9.80652C17.6561 10.1762 17.3009 10.4213 16.9037 10.4213H7.21271L7.58739 11.6449C7.71032 12.0463 8.0767 12.3159 8.49841 12.3159H17.1429V14.2107H8.49841C7.23262 14.2107 6.13425 13.4017 5.76547 12.1971L2.80135 2.51923C2.67906 2.15524 2.31584 1.89481 1.90531 1.89481H0V0H1.90531C3.13665 0 4.22625 0.780776 4.61592 1.94333L4.89127 2.84214H19.0468C19.7116 2.84214 20.1719 3.50286 19.9385 4.1222L19.9385 4.12224ZM7.14259 15.1579C6.35369 15.1579 5.71402 15.7942 5.71402 16.5789C5.71402 17.3638 6.35369 18 7.14259 18C7.93148 18 8.57116 17.3637 8.57116 16.5789C8.57116 15.7942 7.93165 15.1579 7.14259 15.1579ZM16.6667 15.1579C15.8778 15.1579 15.2381 15.7942 15.2381 16.5789C15.2381 17.3637 15.8778 18 16.6667 18C17.4556 18 18.0952 17.3637 18.0952 16.5789C18.0952 15.7942 17.4556 15.1579 16.6667 15.1579Z" fill="white" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="cart-info">
+            <div class="cart-info__header">
+                <h2 class="cart-info__title">Кошик</h2>
+
+                <div class="cart-info__close">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.228129 0.22813C0.532301 -0.0760435 1.0253 -0.0760435 1.32931 0.22813L5 3.89884L8.67069 0.22813C8.97486 -0.0760435 9.46786 -0.0760435 9.77187 0.22813C10.076 0.532304 10.076 1.02531 9.77187 1.32932L6.10118 5.00003L9.77187 8.67075C10.076 8.97492 10.076 9.46793 9.77187 9.77194C9.4677 10.0761 8.9747 10.0759 8.67069 9.77194L5 6.10122L1.32931 9.77194C1.02514 10.0759 0.532139 10.0759 0.228129 9.77194C-0.076043 9.46776 -0.076043 8.97476 0.228129 8.67075L3.89882 5.00003L0.228129 1.32932C-0.076043 1.02515 -0.076043 0.532142 0.228129 0.22813Z" fill="black" />
+                    </svg>
+                </div>
+            </div>
+            <div class="cart-info__allquantity">
+                <div class="cart-info__allquantity-total"></div>
+
+                <div class="cart-info__clear">Видалити все</div>
+            </div>
+            <div class="cart-info__body"></div>
+            <div class="cart-info__total">
+                <span class="cart-info__total-label">Всього</span>
+                <span class="cart-info__total-value">0 грн</span>
+            </div>
+
+            <a href="/order.html" class="btn btn-acent cart-info__btn">перейти до оформлення замовлення</a>
+        </div>
+    </header>
+
+
+    <main class="page-order">
+        <section class="section order">
+            <div class="order__container">
+                <h2 class="section__title order__title">оформлення замовлення</h2>
+
+                <div class="order-grid">
+                    <div class="order-grid__main main-order">
+                        <div class="main-order__group">
+                            <h3 class="main-order__title">Ваші контактні дані</h3>
+                            <fieldset class="form__fieldset">
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderFirstName" data-required data-validate placeholder="Ваше ім’я" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderLastName" data-required data-validate placeholder="Ваше прізвище" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="tel" name="orderPhone" data-required data-validate placeholder="Номер телефону" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="email" name="orderEmail" data-required data-validate placeholder="Електронна пошта" class="form__input">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="main-order__group">
+                            <h3 class="main-order__title">Дані для доставки</h3>
+                            <fieldset class="form__fieldset">
+                                <form action="/customers/submitForm" th:object="${customer}" method="post">
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderCountry" data-required data-validate placeholder="Країна" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderCity" data-required data-validate placeholder="Місто" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderAddress" data-required data-validate placeholder="Адреса" class="form__input">
+                                </div>
+                                <div class="form__row">
+                                    <input autocomplete="off" type="text" name="orderPost" data-required data-validate placeholder="Назва та відділення пошти" class="form__input">
+                                </div>
+                            </fieldset>
+
+                            <div class="main-order__group-info">
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.0111 7.50507L15.011 7.56144C13.0567 7.55809 11.2147 7.74292 9.82347 8.07874L9.80472 8.07871C8.95875 8.28398 8.29983 8.94065 8.09166 9.78592L8.09163 9.80467C7.73216 11.1947 7.54118 13.036 7.55656 14.9905L7.46257 14.9903C7.46592 13.036 7.2811 11.1939 6.94528 9.8027L6.94531 9.78396C6.74004 8.93798 6.06465 8.27902 5.23811 8.07088L5.21937 8.07085C3.82932 7.71138 1.98803 7.5204 0.0336036 7.53577L0.0336681 7.49815L0.0335691 7.47941L0.0336336 7.44179C1.98796 7.44514 3.82999 7.26031 5.2212 6.92449L5.23994 6.92452C6.08595 6.7005 6.74487 6.04385 6.953 5.21731L6.95304 5.19856C7.31251 3.8085 7.50348 1.9672 7.48811 0.012753L7.5821 0.0129141C7.57875 1.96726 7.76357 3.80931 8.09939 5.20053L8.09936 5.21927C8.30463 6.06525 8.96129 6.72418 9.80656 6.93235L9.8253 6.93238C11.2154 7.29185 13.0566 7.48283 15.0111 7.46745L15.0111 7.50507Z" fill="#7A40ED" />
+                                </svg>
+
+                                Надсилання до інших країн оплачується додатково!
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-acent main-order__btn">Оплатити замовлення</button>
+                    </div>
+                    <div class="order-grid__info">
+                        <h3 class="info-order__title">ваше замовлення</h3>
+                        <div class="info-order__inner">
+                            <div class="info-order__item">
+                                <div class="info-order__img">
+                                    <picture><source srcset="img/main/books/book-1.webp" type="image/webp"><img src="img/main/books/book-1.png" alt=""></picture>
+                                </div>
+                                <div class="info-order__details">
+                                    <h4 class="info-order__book">Невигадані істоії вигаданих людей</h4>
+                                    <div class="info-order__price">850 грн</div>
+                                    <div class="info-order__version">Паперова • М’яка обкладинка Українська версія</div>
+
+                                    <div data-quantity class="quantity">
+                                        <button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+                                        <div class="quantity__input">
+                                            <input data-quantity-value autocomplete="off" type="text" name="form[]" value="1">
+                                        </div>
+                                        <button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+                                    </div>
+
+                                </div>
+                                <div class="info-order__del">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.31938 0.319383C0.745221 -0.106461 1.43542 -0.106461 1.86104 0.319383L7 5.45838L12.139 0.319383C12.5648 -0.106461 13.255 -0.106461 13.6806 0.319383C14.1065 0.745226 14.1065 1.43543 13.6806 1.86105L8.54166 7.00005L13.6806 12.139C14.1065 12.5649 14.1065 13.2551 13.6806 13.6807C13.2548 14.1066 12.5646 14.1063 12.139 13.6807L7 8.54171L1.86104 13.6807C1.4352 14.1063 0.744994 14.1063 0.31938 13.6807C-0.10646 13.2549 -0.10646 12.5647 0.31938 12.139L5.45834 7.00005L0.31938 1.86105C-0.10646 1.43521 -0.10646 0.744999 0.31938 0.319383Z" fill="#BDBDBD" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="info-order__item">
+                                <div class="info-order__img">
+                                    <picture><source srcset="img/main/books/book-1.webp" type="image/webp"><img src="img/main/books/book-1.png" alt=""></picture>
+                                </div>
+                                <div class="info-order__details">
+                                    <h4 class="info-order__book">Невигадані істоії вигаданих людей</h4>
+                                    <div class="info-order__price">850 грн</div>
+                                    <div class="info-order__version">Паперова • М’яка обкладинка Українська версія</div>
+
+                                    <div data-quantity class="quantity">
+                                        <button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+                                        <div class="quantity__input">
+                                            <input data-quantity-value autocomplete="off" type="text" name="form[]" value="1">
+                                        </div>
+                                        <button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+                                    </div>
+
+                                </div>
+                                <div class="info-order__del">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.31938 0.319383C0.745221 -0.106461 1.43542 -0.106461 1.86104 0.319383L7 5.45838L12.139 0.319383C12.5648 -0.106461 13.255 -0.106461 13.6806 0.319383C14.1065 0.745226 14.1065 1.43543 13.6806 1.86105L8.54166 7.00005L13.6806 12.139C14.1065 12.5649 14.1065 13.2551 13.6806 13.6807C13.2548 14.1066 12.5646 14.1063 12.139 13.6807L7 8.54171L1.86104 13.6807C1.4352 14.1063 0.744994 14.1063 0.31938 13.6807C-0.10646 13.2549 -0.10646 12.5647 0.31938 12.139L5.45834 7.00005L0.31938 1.86105C-0.10646 1.43521 -0.10646 0.744999 0.31938 0.319383Z" fill="#BDBDBD" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="info-order__total">
+                                <span class="info-order__total-label">До сплати</span>
+                                <span class="info-order__total-value">2450 грн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__container">
+            <a href="" class="footer__link">Офферта</a>
+
+            <div class="social">
+                <a href="https://www.facebook.com/dr.isaenko.clinic" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M13 2.15544C13 1.01036 11.9896 0 10.8446 0H2.15544C1.01036 0 0 1.01036 0 2.15544V10.8446C0 11.9896 1.01036 13 2.15544 13H6.53368V8.0829H4.9171V5.92746H6.53368V5.05181C6.53368 3.56995 7.6114 2.29015 8.95855 2.29015H10.7098V4.44559H8.95855C8.75648 4.44559 8.5544 4.64767 8.5544 5.05181V5.92746H10.7098V8.0829H8.5544V13H10.8446C11.9896 13 13 11.9896 13 10.8446V2.15544Z" fill="white"></path>
+                    </svg>
+
+                </a>
+                <a href="https://instagram.com/dr.isaenko.clinic" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M11.15 0H1.85C0.799999 0 0 0.8 0 1.85V11.15C0 12.2 0.799999 13 1.85 13H11.15C12.2 13 13 12.2 13 11.15V1.85C13 0.8 12.2 0 11.15 0ZM6.5 10.4C8.65 10.4 10.4 8.7 10.4 6.65C10.4 6.3 10.35 5.9 10.25 5.6H11.35V10.9C11.35 11.15 11.15 11.4 10.85 11.4H2.15C1.9 11.4 1.65 11.2 1.65 10.9V5.55H2.8C2.7 5.9 2.65 6.25 2.65 6.6C2.6 8.7 4.35 10.4 6.5 10.4ZM6.5 8.9C5.1 8.9 4 7.8 4 6.45C4 5.1 5.1 4 6.5 4C7.9 4 9 5.1 9 6.45C9 7.85 7.9 8.9 6.5 8.9ZM11.3 3.55C11.3 3.85 11.05 4.1 10.75 4.1H9.35C9.05 4.1 8.8 3.85 8.8 3.55V2.2C8.8 1.9 9.05 1.65 9.35 1.65H10.75C11.05 1.65 11.3 1.9 11.3 2.2V3.55Z" fill="white"></path>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCZFS3cju-ynf-4ZRjdcnAaA" class="social__item">
+                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
+                        <path d="M15 4.22222C15 3.88888 14.9453 3.5 14.9453 3.05556C14.8905 2.61111 14.8358 2.16666 14.781 1.77778C14.6715 1.33333 14.5073 1 14.1788 0.722224C13.9051 0.444446 13.5219 0.277774 13.1387 0.222219C11.8796 0.0555522 10.0183 0 7.50001 0C4.98176 0 3.06569 0.0555522 1.86131 0.222219C1.4781 0.277774 1.09489 0.444446 0.821168 0.722224C0.547445 1 0.328464 1.33333 0.218975 1.77778C0.109486 2.16666 0.0547479 2.55556 0.0547479 3.05556C3.33766e-06 3.5 0 3.88888 0 4.22222C0 4.55555 0 4.94444 0 5.5C0 6.05555 0 6.5 0 6.77778C0 7.11111 0.0547479 7.5 0.0547479 7.94445C0.109492 8.38889 0.16423 8.83333 0.218975 9.22222C0.328464 9.66666 0.492701 10 0.821168 10.2778C1.09489 10.5556 1.4781 10.7222 1.86131 10.7778C3.12044 10.9444 4.98176 11 7.50001 11C10.0183 11 11.9343 10.9444 13.1387 10.7778C13.5219 10.7222 13.9051 10.5556 14.1788 10.2778C14.4526 10 14.6715 9.66666 14.781 9.22222C14.8905 8.83333 14.9453 8.44445 14.9453 7.94445C15 7.5 15 7.11111 15 6.77778C15 6.44444 15 6.05555 15 5.5C15 4.94444 15 4.49999 15 4.22222ZM10.4015 5.94444L6.07665 8.66666C6.0219 8.72222 5.91241 8.77778 5.80292 8.77778C5.69344 8.77778 5.63869 8.77778 5.5292 8.72222C5.36497 8.61111 5.25548 8.44444 5.25548 8.22222V2.72222C5.25548 2.5 5.36497 2.33333 5.5292 2.22222C5.69344 2.11111 5.91241 2.11111 6.07665 2.22222L10.4015 4.94444C10.5657 5.05555 10.6752 5.22222 10.6752 5.38889C10.6752 5.55555 10.5657 5.83333 10.4015 5.94444Z" fill="white"></path>
+                    </svg>
+                </a>
+                <a href="https://dr-isaenko.com/" class="social__item">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M12.9999 6.3208H9.92866C9.89613 3.50254 9.0187 1.10777 7.78362 0.114035C10.6923 0.700501 12.9186 3.24185 12.9998 6.3208H12.9999ZM6.32119 6.3208H3.42872C3.47746 2.99749 4.76127 0.211779 6.30497 0V6.3208H6.32119ZM6.32119 6.6792V13C4.77749 12.7882 3.49369 10.0025 3.44494 6.6792H6.32119ZM6.67869 6.6792H9.55494C9.5062 10.0025 8.2224 12.7882 6.67869 13V6.6792ZM6.67869 6.3208V0C8.2224 0.211814 9.50619 2.99749 9.55494 6.3208H6.67869ZM5.21626 0.114035C3.9813 1.10777 3.10375 3.50251 3.07122 6.3208H0C0.0812725 3.24185 2.30748 0.700501 5.2162 0.114035H5.21626ZM5.80033e-05 6.6792H3.07128C3.10381 9.49747 3.98124 11.8922 5.21632 12.886C2.3076 12.2995 0.0813653 9.75815 0.000116007 6.6792H5.80033e-05ZM7.78374 12.886C9.0187 11.8922 9.89625 9.49749 9.92878 6.6792H13C12.9187 9.75815 10.6925 12.2995 7.7838 12.886H7.78374Z" fill="white"></path>
+                    </svg>
+
+                </a>
+            </div>
+
+            <div class="footer__copyright">
+                © Все права защищены,2022
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="js/app.min.js?_v=20230424235853"></script>
+</body>
+
+</html>

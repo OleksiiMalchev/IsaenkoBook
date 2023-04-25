@@ -7,15 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerMapper {
-    public CustomerRespDTO toCustomerRespDTO(Customer customer) {
-        return CustomerRespDTO.builder().customerId(customer.getId())
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .middleName(customer.getMiddleName())
-                .email(customer.getEmail())
-                .mobile(customer.getMobile())
-                .build();
-    }
 
     public Customer toCustomer(CustomerReqDTO customerReqDTO) {
         return Customer.builder()
@@ -24,5 +15,18 @@ public class CustomerMapper {
                 .lastName(customerReqDTO.getLastName())
                 .mobile(customerReqDTO.getMobile())
                 .email(customerReqDTO.getEmail()).build();
+    }
+
+    public CustomerRespDTO toCustomerRespDTO(Customer customer) {
+        if(customer!=null){
+            return CustomerRespDTO.builder().customerId(customer.getId())
+                    .firstName(customer.getFirstName())
+                    .lastName(customer.getLastName())
+                    .middleName(customer.getMiddleName())
+                    .email(customer.getEmail())
+                    .mobile(customer.getMobile())
+                    .build();
+        }
+        return null;
     }
 }

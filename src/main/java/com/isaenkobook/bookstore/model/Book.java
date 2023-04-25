@@ -39,7 +39,7 @@ public class Book {
     @Column(name = "language")
     private Language language;
     @Enumerated(EnumType.STRING)
-    @Column(name = "format")
+    @Column(name = "format_book")
     private Format formatBook;
     @Column(name = "price")
     private BigDecimal price;
