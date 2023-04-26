@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+<html lang="ua">
 
 <head>
     <title>OrderPage</title>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" th:href="@{/css/style.min.css?_v=20230424235853}"/>
-    <link rel="shortcut icon" th:href="favicon.ico" />
+    <!-- <style>body{opacity: 0;}</style> -->
+    <link rel="stylesheet" href="css/style.min.css?_v=20230424235853">
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -14,15 +16,16 @@
 <div class="wrapper">
     <header class="header">
         <div class="header__container">
-            <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
+            <a href="/" class="header__brand">Dr. Issaenko</a>
+
             <button type="button" class="menu__icon icon-menu"><span></span></button>
             <div class="header__menu menu">
                 <nav class="menu__body">
                     <ul class="menu__list">
-                        <li class="menu__item goto"><a href="#main-author" class="menu__link" th:href="@{'#main-author'}">[[#{button.about.author}]]</a></li>
-                        <li class="menu__item goto"><a href="#main-about" class="menu__link" th:href="@{'#main-about'}">[[#{button.about.books}]]</a></li>
-                        <li class="menu__item goto"><a href="#main-books" class="menu__link" th:href="@{'#main-books'}">[[#{button.buy.books}]]</a></li>
-                        <li class="menu__item goto"><a href="#reviews" class="menu__link" th:href="@{'#reviews'}">[[#{button.reviews}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-author" class="menu__link">Об авторе</a></li>
+                        <li class="menu__item goto"><a href="#main-about" class="menu__link">О чем книги?</a></li>
+                        <li class="menu__item goto"><a href="#main-books" class="menu__link">Купить книги</a></li>
+                        <li class="menu__item goto"><a href="#reviews" class="menu__link">Отзывы</a></li>
                     </ul>
                 </nav>
             </div>
@@ -30,19 +33,15 @@
             <div class="header__right">
                 <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
                     <div class="langs__body">
-                        <form method="GET" action="/change-locale">
-                            <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.ukrainian}]]
-                                <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
-                                    <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
-                                </svg>
-                            </button>
-                            <div class="langs__list">
-                                <a class="langs__item">
-                                    <button type="submit" name="locale" value="message_ru" data-spoller class="langs__current">[[#{button.russian}]]</button></a>
-                                <a class="langs__item">
-                                    <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.english}]]</button></a>
-                            </div>
-                        </form>
+                        <button type="button" data-spoller class="langs__current">Украинский
+                            <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
+                                <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
+                            </svg>
+                        </button>
+                        <div class="langs__list">
+                            <a class="langs__item">Русский</a>
+                            <a class="langs__item">Английский</a>
+                        </div>
                     </div>
                 </div>
 
@@ -113,7 +112,6 @@
                         <div class="main-order__group">
                             <h3 class="main-order__title">Дані для доставки</h3>
                             <fieldset class="form__fieldset">
-                                <form action="/customers/submitForm" th:object="${customer}" method="post">
                                 <div class="form__row">
                                     <input autocomplete="off" type="text" name="orderCountry" data-required data-validate placeholder="Країна" class="form__input">
                                 </div>

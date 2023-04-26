@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderRespDTO> findOrders() {
-        return orderRepository.findAll().stream().map(orderMapper::toOrderRespDTO).toList();
+        return orderRepository.findAll().stream()
+                .map(orderMapper::toOrderRespDTO).toList();
+    }
+
+    @Override
+    public List<OrderRespDTO> findOrdersByCustomerId(Long customerId) {
+        return orderRepository.findOrdersByCustomerId(customerId)
+                .stream()
+                .map(orderMapper::toOrderRespDTO).toList();
+    }
+
+    @Override
+    public List<OrderRespDTO> findOrdersByStatus(String statusName) {
+        return orderRepository.findOrdersByStatus(statusName).stream()
+                .map(orderMapper::toOrderRespDTO).toList();
     }
 
     @Override
@@ -32,26 +47,21 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findById(orderId).map(orderMapper::toOrderRespDTO);
     }
 
+
     @Override
     public OrderRespDTO createOrder(Long customerId) {
-        if(customerRepository.existsById(customerId)){
-            Order order = Order.builder().customerId(customerId)
-                    .createdAt(LocalDateTime.now())
-                    .changeAt(LocalDateTime.now())
-                    .orderStatus(OrderStatus.NEW).build();
-            orderRepository.save(order);
-            return orderMapper.toOrderRespDTO(order);
+        if (customerId != null && customerRepository.existsById(customerId)) {
+            Order order = Order.builder().customerId(customerId).createdAt(LocalDateTime.now())
+                    .changeAt(LocalDateTime.now()).orderStatus(OrderStatus.NEW).build();
+            Order saveOrder = orderRepository.save(order);
+            return orderMapper.toOrderRespDTO(saveOrder);
         }
         return null;
     }
 
     @Override
-    public OrderRespDTO updateOrder(Order order, List<OrderDetails> orderDetails, OrderStatus orderStatus) {
-        order.setOrderDetails(orderDetails);
-        order.setChangeAt(LocalDateTime.now());
-        order.setOrderStatus(orderStatus);
-        Order saveOrder = orderRepository.save(order);
-        return orderMapper.toOrderRespDTO(saveOrder);
+    public OrderRespDTO updateOrder(Order order, List<OrderDetails> orderDetailsList, OrderStatus orderStatus) {
+        return null;
     }
 
     @Override

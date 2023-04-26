@@ -15,11 +15,10 @@ public interface OrderService {
 
     List<OrderRespDTO> findOrdersByCustomerId(Long customerId);
 
-    List<OrderRespDTO> findOrderByStatus(String statusName);
+    List<OrderRespDTO> findOrdersByStatus(String statusName);
 
-    Optional<OrderRespDTO> findOrdersById(Long orderId);
+    Optional<OrderRespDTO> findOrderById(Long orderId);
 
-    Optional<OrderRespDTO> findOrdersByCustomerIdAndStatus(Long customerId, String statusName);
 
     OrderRespDTO createOrder(Long customerId);
 
