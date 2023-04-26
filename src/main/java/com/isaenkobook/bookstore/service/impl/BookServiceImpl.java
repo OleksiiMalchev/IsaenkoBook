@@ -34,9 +34,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookRespDTO> findBooksByTitle(String title) {
-        return bookRepository.findByTitle(title).stream().map(bookMapper::toBookRespDTO)
-                .collect(Collectors.toList());
+        return bookRepository.findBooksByTitle(title).stream()
+                .map(bookMapper::toBookRespDTO).toList();
     }
+
 
 
     @Override

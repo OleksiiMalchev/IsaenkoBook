@@ -15,5 +15,5 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> findAll();
 
     @Query("SELECT book FROM Book book WHERE book.title = :title")
-    List<Book> findByTitle(@Param("title") String title);
+    List<Book> findBooksByTitle(@Param("title") String title);
 }

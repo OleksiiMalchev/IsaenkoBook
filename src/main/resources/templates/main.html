@@ -14,6 +14,7 @@
     <header class="header">
         <div class="header__container">
             <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
+
             <button type="button" class="menu__icon icon-menu"><span></span></button>
             <div class="header__menu menu">
                 <nav class="menu__body">
@@ -25,47 +26,47 @@
                     </ul>
                 </nav>
             </div>
+
             <div class="header__right">
                 <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
                     <div class="langs__body">
-                        <form method="GET" action="/change-locale">
-                            <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.ukrainian}]]
-                                <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
-                                    <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
-                                </svg>
-                            </button>
-                            <div class="langs__list">
-                                <a class="langs__item">
-                                    <button type="submit" name="locale" value="message_ru" data-spoller class="langs__current">[[#{button.russian}]]</button></a>
-                                <a class="langs__item">
-                                    <button type="submit" name="locale" value="message_en" data-spoller class="langs__current">[[#{button.english}]]</button></a>
-                            </div>
-                        </form>
+                        <button type="button" data-spoller class="langs__current">Украинский
+                            <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
+                                <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
+                            </svg>
+                        </button>
+                        <div class="langs__list">
+                            <a class="langs__item">Русский</a>
+                            <a class="langs__item">Английский</a>
+                        </div>
                     </div>
                 </div>
+
                 <a th:href="@{/}" data-da=".menu__body, 480, last" class="btn btn-acent header__btn">[[#{button.cart}]]</a>
             </div>
         </div>
     </header>
+
     <main class="page-main">
         <section data-fullscreen class="section main-hero">
             <div class="main-hero__container">
                 <div class="main-hero__body">
                     <h1 class="main-title main-hero__title">[[#{slogan.book}]]<div class="title-group">[[#{slogan.message}]]</div>
                     </h1>
+
                     <div class="main-hero__desc">
                         <p>[[#{info.imagine.part1}]]&nbsp;[[#{info.imagine.part2}]]</p>
                         <p>[[#{info.give.vector}]]</p>
                     </div>
                 </div>
+
                 <div class="main-hero__img">
                     <picture>
-                        <source th:srcset="@{/image/main/hero-img.webp}" type="image/webp"/>
-                        <img th:src="@{/image/main/hero-img.png}" alt="Isaenko"/>
-                    </picture>
+                        <source th:srcset="@{/image/main/hero-img.webp}" type="image/webp"/> <img th:src="@{/image/main/hero-img.png}" alt="Isaenko"/></picture>
                 </div>
             </div>
         </section>
+
         <section id="main-author" class="section main-author">
             <div class="main-author__container">
                 <h2 class="section__title main-author__title">
@@ -86,11 +87,13 @@
                     </p>
                 </div>
             </div>
+
         </section>
         <section id="main-about" class="section main-about">
             <div class=" main-about__container">
                 <h2 class="section__title  main-about__title">[[#{about.books}]]</h2>
                 <p class="main-about__text">[[#{will.find}]]</p>
+
                 <div class="main-about__list">
                     <div class="main-about__item">
                         <div class="main-about__item-icon">
@@ -110,9 +113,7 @@
                             </svg>
                         </div>
                         <h3 class="main-about__item-title">[[#{love.ch.quotes}]]</h3>
-                        <p class="main-about__item-desc">
-                            [[#{about.humanity}]]
-                        </p>
+                        <p class="main-about__item-desc">[[#{about.humanity}]]</p>
                     </div>
                     <div class="main-about__item">
                         <div class="main-about__item-icon">
@@ -121,9 +122,7 @@
                             </svg>
                         </div>
                         <h3 class="main-about__item-title">[[#{monsters.quotes}]] </h3>
-                        <p class="main-about__item-desc">
-                            [[#{about.obuzivnye}]]
-                        </p>
+                        <p class="main-about__item-desc">[[#{about.obuzivnye}]]</p>
                     </div>
                 </div>
             </div>
@@ -134,18 +133,22 @@
                     <span>[[#{well.perhaps}]]</span>
                 </h3>
                 <h2 class="section__title main-books__title">[[#{welcome.body}]]</h2>
+
                 <div class="main-books__list">
                     <div class="main-books__item">
                         <div class="main-books__item-img" style="background-image: url(image/main/books/01.png);">
-                            <picture>
-                                <source th:srcset="@{/image/main/books/book-1.webp}" type="image/webp">
-                                <img th:src="@{/image/main/books/book-1.png}" alt="">
-                            </picture>
+                            <picture> <source th:srcset="@{/image/main/books/book-1.webp}" type="image/webp"><img th:src="@{/image/main/books/book-1.png}" alt=""></picture>
                         </div>
+
+
+
+
+
                         <div class="main-books__item-group">
                             <h3 class="main-books__item-title">[[#{true.stories}]]</h3>
-                            <a href="" class="btn">[[#{more}]]</a>
+                            <a th:href="@{/books/{title}(title='Невыдуманные истории выдуманных людей')}" class="btn" th:text="#{more}">[[#{more}]]</a>
                         </div>
+
                     </div>
                     <div class="main-books__item">
                         <div class="main-books__item-img" style="background-image: url(image/main/books/02.png);">
