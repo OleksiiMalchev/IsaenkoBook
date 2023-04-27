@@ -191,7 +191,7 @@
 
             <div class="main-books__item-group">
               <h3 class="main-books__item-title">[[#{true.stories}]]</h3>
-              <a href="/book-1.html" class="btn">[[#{more}]]</a>
+              <button type="button" onclick="window.location.href='/book-page?article=stories'" class="btn">[[#{more}]]</button>
             </div>
 
           </div>
@@ -206,7 +206,7 @@
 
             <div class="main-books__item-group">
               <h3 class="main-books__item-title">[[#{monsters}]] </h3>
-              <a href="book-2.html" class="btn">[[#{more}]]</a>
+              <button type="button" onclick="window.location.href='/book-page?article=monsters'" class="btn">[[#{more}]]</button>
             </div>
 
           </div>
@@ -220,7 +220,7 @@
             </div>
             <div class="main-books__item-group">
               <h3 class="main-books__item-title">[[#{love.ch}]]</h3>
-              <a href="book-3.html" class="btn">[[#{more}]]</a>
+              <button type="button" onclick="window.location.href='/book-page?article=love'" class="btn">[[#{more}]]</button>
             </div>
           </div>
         </div>
@@ -323,29 +323,29 @@
   <div class="modal__wrapper modal-callback__wrapper">
     <div class="modal__content modal-callback__content">
       <div class="modal-callback__header">
-        <h3 class="modal-callback__title">Оставьте нам сообщение</h3>
+        <h3 class="modal-callback__title">[[#{leave.message}]]</h3>
         <button data-close type="button" class="modal-callback__close"></button>
       </div>
       <div class="modal-callback__body">
         <form class="form modal-callback__form" action="/callback" method="POST">
           <div class="form__row">
-            <label class="form__label">Ваше имя <span>(необязательно)</span></label>
+            <label class="form__label">[[#{name}]] <span>[[#{not.necessary}]]</span></label>
             <input type="text" name="name" class="form__input">
           </div>
           <div class="form__row">
-            <label class="form__label">Адрес эл.почты</label>
+            <label class="form__label">[[#{email}]]</label>
             <input type="email" name="email" data-required data-validate class="form__input">
           </div>
           <div class="form__row">
-            <label class="form__label">Телефон</label>
+            <label class="form__label">[[#{telephone}]]</label>
             <input type="phone" name="phone" data-required data-validate class="form__input">
           </div>
           <div class="form__row">
-            <label class="form__label">Чем мы можем вам помочь?</label>
+            <label class="form__label">[[#{help.you}]]</label>
             <textarea name="message" class="form__textarea" data-required data-validate></textarea>
           </div>
           <div class="form__row">
-            <button type="submit" class="btn btn-acent form__button">отправить</button>
+            <button type="submit" class="btn btn-acent form__button">[[#{send}]]</button>
           </div>
         </form>
       </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>BookPage</title>
@@ -16,16 +16,16 @@
 <div class="wrapper">
     <header class="header">
         <div class="header__container">
-            <a href="/" class="header__brand">Dr. Issaenko</a>
+            <a th:href="@{/}" class="header__brand">Dr. Issaenko</a>
 
             <button type="button" class="menu__icon icon-menu"><span></span></button>
             <div class="header__menu menu">
                 <nav class="menu__body">
                     <ul class="menu__list">
-                        <li class="menu__item goto"><a href="#main-author" class="menu__link">Об авторе</a></li>
-                        <li class="menu__item goto"><a href="#main-about" class="menu__link">О чем книги?</a></li>
-                        <li class="menu__item goto"><a href="#main-books" class="menu__link">Купить книги</a></li>
-                        <li class="menu__item goto"><a href="#reviews" class="menu__link">Отзывы</a></li>
+                        <li class="menu__item goto"><a href="#main-author" class="menu__link" th:href="@{'#main-author'}">[[#{button.about.author}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-about" class="menu__link" th:href="@{'#main-about'}">[[#{button.about.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#main-books" class="menu__link" th:href="@{'#main-books'}">[[#{button.buy.books}]]</a></li>
+                        <li class="menu__item goto"><a href="#reviews" class="menu__link" th:href="@{'#reviews'}">[[#{button.reviews}]]</a></li>
                     </ul>
                 </nav>
             </div>
@@ -33,21 +33,22 @@
             <div class="header__right">
                 <div data-da=".menu__body, 992, first" data-spollers class="header__langs langs">
                     <div class="langs__body">
-                        <button type="button" data-spoller class="langs__current">Украинский
+                        <button type="button" data-spoller class="langs__current" style="width: 120px; display: flex; justify-content: center; align-items: center;">[[#{language}]]
                             <svg width="19" height="11" viewBox="0 0 19 11" fill="none">
                                 <path d="M10.3014 10.2277L19 1.61493L17.3971 -1.67163e-07L9.5 7.81699L1.60291 5.23223e-07L-4.10234e-07 1.61493L8.69859 10.2277L9.50004 11L10.3014 10.2277Z" fill="#7A40ED" />
                             </svg>
                         </button>
                         <div class="langs__list">
-                            <a class="langs__item">Русский</a>
-                            <a class="langs__item">Английский</a>
+                            <button type="button" onclick="window.location.href='/change-locale?locale=messages_uk'" class="langs__item">[[#{button.ukrainian}]]</button>
+                            <button type="button" onclick="window.location.href='/change-locale?locale=messages_ru'" class="langs__item">[[#{button.russian}]]</button>
+                            <button type="button" onclick="window.location.href='/change-locale?locale=messages_en'" class="langs__item">[[#{button.english}]]</button>
                         </div>
                     </div>
                 </div>
 
 
                 <a href="" class="header__cart cart">
-                    <span>корзина</span>
+                    <span>[[#{button.cart}]]</span>
                     <div class="cart__quantity"></div>
                     <div class="cart__icon">
                         <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +62,7 @@
 
         <div class="cart-info">
             <div class="cart-info__header">
-                <h2 class="cart-info__title">Кошик</h2>
+                <h2 class="cart-info__title">[[#{button.cart}]]</h2>
 
                 <div class="cart-info__close">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,43 +87,24 @@
 
 
     <main class="page-book">
-        <section data-fullscreen class="section book-hero" style="background-image: url(img/book-bg-1.png);">
+        <section data-fullscreen class="section book-hero" th:style="'background-image: url(image/' + ${image.backgroundImage} + ');'"> <!-- url(img/book-bg-1.png) -->
             <div class="book-hero__container">
-                <h1 class="page-title book-hero__title">Невигадані істоії вигаданих людей</h1>
-
-                <div class="book-hero__text">
-                    <p>Книга, яка змінить твій світогляд!
-                        Якщо ти хочеш душевну історію, це те, що ти шукав </p>
-                </div>
-
+                <h1 class="page-title book-hero__title" th:text="${image.bookHeroTitle}"></h1> <!-- Невигадані істоії вигаданих людей -->
+                <div class="book-hero__text" th:utext="${image.bookHeroText}"> <!-- <p>Книга, яка змінить твій світогляд! Якщо ти хочеш душевну історію, це те, що ти шукав </p> --></div>
                 <div class="book-hero__img">
-                    <picture><source srcset="img/main/books/book-1.webp" type="image/webp"><img src="img/main/books/book-1.png" alt=""></picture>
+                    <picture>
+                        <source th:srcset="@{'image/main/books/' + ${image.bookHeroImg} + '.webp'}" type="image/webp">
+                        <img th:src="@{'image/main/books/' + ${image.bookHeroImg} + '.png'}" alt="">
+                    </picture>
                 </div>
             </div>
         </section>
         <section class="section book-info">
             <div class="book-info__container">
-                <div class="book-info__group">
-                    <p>
-                        Тобі набридла нудна белетристика, сопливі жіночі романи без сенсу, передбачувані детективи і надумана фантистика?
-                    </p>
-                    <p>
-                        Тобі потрібна книга, яка буде, як ковток свіжого повітря, яка легко читається і захоплює, примушує часом реготати наодинці з собою в порожній кімнаті або щиро ридати без ніяковості у транспорті
-                    </p>
-                </div>
-                <h2 class="section__title book-info__title">Книга, яка змусить замислитися</h2>
-                <div class="book-info__group">
-                    <p>
-                        Про сенс життя, людських вчинках, співпереживати героям, а іноді пофілософствувати. Як сказав один британський письменник Себастьян Фолкс (автор роману про Джеймса Бонда): "Читання книг - не спосіб втечі від життя, книги дають ключ до її розуміння. Ключ до реальності"
-                    </p>
-                    <p>
-                        Завдяки "Невигаданим Історіям Вигаданих Людей" ти зможеш переглянути свій погляд на багато, здавалося б, буденних речей. Подивитися на світ ширше, під іншим кутом, який раніше, можливо, вважав абсурдним. Вона дасть поштовх новому витку життя і допоможе стати трішки щасливіше
-                    </p>
-                </div>
-                <div class="book-info__ps">
-                    <span>P.S.</span>
-                    <p>Цей невеликий роман про величезний навколишній світ та відкрите серце. Прочитай її‚ зміни свій світогляд, змінивши себе. Наважся!</p>
-                </div>
+                <div class="book-info__group" th:utext="${image.bookInfoGroupFS}"></div>
+                <h2 class="section__title book-info__title" th:text="${image.bookInfoTitle}"></h2>
+                <div class="book-info__group" th:utext="${image.bookInfoGroupSS}"></div>
+                <div class="book-info__ps" th:utext="${image.postScript}"></div>
             </div>
         </section>
         <section class="section book-order">
@@ -275,7 +257,7 @@
             </div>
         </section>
         <section id="reviews" class="section reviews">
-            <h2 class="section__title reviews__title">отзывы о книгах</h2>
+            <h2 class="section__title reviews__title">[[#{book.reviews}]]</h2>
 
             <div class="reviews__slider swiper">
                 <div class="reviews__wrapper swiper-wrapper">
@@ -295,8 +277,8 @@
         </section>
         <section class="section set">
             <div class="set__container">
-                <h2 class="section__title set__title">Воспользуйся выгодным предложением и купи три книги сразу</h2>
-                <p class="set__text">Хотите сэкономить до 20% на покупке книг? Купите три книги сразу и получите скидку!</p>
+                <h2 class="section__title set__title">[[#{take.advantage}]]</h2>
+                <p class="set__text">[[#{want.save}]]</p>
 
 
                 <div class="set__img">
@@ -306,7 +288,7 @@
                 <div class="book-version">
                     <div class="book-version__group">
                         <a href="" class="btn btn-acent set__btn btn-version-js">
-                            купити комплект книг
+                            [[#{buy.set.books}]]
                             <svg class="book-version__icon" width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.06533 7.99711C7.89831 7.98249 7.74027 7.91484 7.61399 7.80376L0.292495 1.41788C0.125896 1.28147 0.0214056 1.08255 0.00291104 0.866924C-0.0154467 0.651301 0.0535678 0.437338 0.194496 0.274199C0.335424 0.110917 0.535981 0.0123601 0.750322 0.00108528C0.964663 -0.01019 1.17435 0.0667901 1.33127 0.214342L8.13333 6.14515L14.9354 0.214342C15.0923 0.0667901 15.302 -0.01019 15.5163 0.00108528C15.7307 0.0123601 15.9313 0.110913 16.0722 0.274199C16.2131 0.437341 16.2821 0.651294 16.2638 0.866924C16.2453 1.08255 16.1408 1.28147 15.9742 1.41788L8.65268 7.80376C8.49091 7.94574 8.2789 8.01548 8.06523 7.99711H8.06533Z" fill="#fff" />
                             </svg>
@@ -341,7 +323,7 @@
     </main>
     <footer class="footer">
         <div class="footer__container">
-            <a href="" class="footer__link">Офферта</a>
+            <a href="" class="footer__link">[[#{offer}]]</a>
 
             <div class="social">
                 <a href="https://www.facebook.com/dr.isaenko.clinic" class="social__item">
@@ -369,7 +351,7 @@
             </div>
 
             <div class="footer__copyright">
-                © Все права защищены,2022
+                [[#{all.rights.reserved}]]
             </div>
         </div>
     </footer>
