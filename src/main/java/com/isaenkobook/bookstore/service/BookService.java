@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface BookService {
     List<BookRespDTO> findBooks();
     List<BookRespDTO> findBooksByTitle(String title);
+    List<BookRespDTO> findBooksByLangAndArticle(String lang,String article);
     Optional<BookRespDTO> findBookById(Long bookId);
     BookRespDTO createBook(BookReqDTO bookReqDto);
 

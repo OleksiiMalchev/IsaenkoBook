@@ -3,6 +3,7 @@ package com.isaenkobook.bookstore.controller;
 import com.isaenkobook.bookstore.model.dto.BookReqDTO;
 import com.isaenkobook.bookstore.model.dto.BookRespDTO;
 import com.isaenkobook.bookstore.service.BookService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
@@ -41,15 +42,16 @@ public class BookController {
 //    }
 
     @GetMapping("/books/{title}")
-    public String getBooksByTitle(@RequestParam("title") String title, Model model) {
-        List<BookRespDTO> booksByTitle = bookService.findBooksByTitle(title);
-        if (booksByTitle.isEmpty()) {
-            model.addAttribute("errorMessage", "Books not found");
-        } else {
-            model.addAttribute("books", booksByTitle);
-        }
-        return "books-1";
+    public String getBooksByTitle( Model model,HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+        List<BookRespDTO> books = bookService.findBooks();
+            model.addAttribute("books_all", books);
+        return "redirect:"+referer;
     }
+
+
+
+
 
 
 

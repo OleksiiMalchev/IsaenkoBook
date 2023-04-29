@@ -30,11 +30,11 @@ public class CartServiceImpl implements CartService {
 
 
     @Override
-    public void addItem(CartItemReqDTO cartItemRequestDTO) {
-        if (bookRepository.existsById(cartItemRequestDTO.getBookId())) {
-            Book book = bookRepository.findById(cartItemRequestDTO.getBookId()).get();
+    public void addItem(Long bookId, Integer quantity) {
+        if (bookRepository.existsById(bookId)) {
+            Book book = bookRepository.findById(bookId).get();
             CartItem cartItem = cartItems.getOrDefault(book.getId(), CartItem.builder().book(book).quantity(0).build());
-            cartItem.setQuantity(cartItem.getQuantity() + cartItemRequestDTO.getQuantity());
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
             cartItems.put(book.getId(), cartItem);
         }else {
             throw new NoSuchElementException("Item not found in cart.");
