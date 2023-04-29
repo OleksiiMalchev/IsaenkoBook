@@ -75,7 +75,33 @@
 
         <div class="cart-info__clear">Видалити все</div>
       </div>
-      <div class="cart-info__body"></div>
+      <div class="cart-info__body">
+
+        <div class="cart-info__item">
+          <div class="cart-info__img">
+            <img src=${image} alt="${name}">
+          </div>
+          <div class="cart-info__details">
+            <h4 class="cart-info__book">${name}</h4>
+            <div class="cart-info__price">${price}</div>
+            <div class="cart-info__version">${version}</div>
+
+            <div class="cart-info__quantity">
+              <button type="button" class="cart-info__quantity-button cart-info__quantity-button-minus"></button>
+              <input class="cart-info__quantity-input" type="text" name="form[]" value="${quantity}">
+              <button type="button" class="cart-info__quantity-button cart-info__quantity-button-plus"></button>
+            </div>
+
+          </div>
+          <div class="cart-info__del">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.31938 0.319383C0.745221 -0.106461 1.43542 -0.106461 1.86104 0.319383L7 5.45838L12.139 0.319383C12.5648 -0.106461 13.255 -0.106461 13.6806 0.319383C14.1065 0.745226 14.1065 1.43543 13.6806 1.86105L8.54166 7.00005L13.6806 12.139C14.1065 12.5649 14.1065 13.2551 13.6806 13.6807C13.2548 14.1066 12.5646 14.1063 12.139 13.6807L7 8.54171L1.86104 13.6807C1.4352 14.1063 0.744994 14.1063 0.31938 13.6807C-0.10646 13.2549 -0.10646 12.5647 0.31938 12.139L5.45834 7.00005L0.31938 1.86105C-0.10646 1.43521 -0.10646 0.744999 0.31938 0.319383Z" fill="#BDBDBD"/>
+            </svg>
+          </div>
+
+        </div>
+
+      </div>
       <div class="cart-info__total">
         <span class="cart-info__total-label">Всього</span>
         <span class="cart-info__total-value">0 грн</span>
@@ -191,7 +217,9 @@
 
             <div class="main-books__item-group">
               <h3 class="main-books__item-title">[[#{true.stories}]]</h3>
-              <button type="button" onclick="window.location.href='/book-page?article=stories'" class="btn">[[#{more}]]</button>
+
+              <a href="/book-page?article=stories" class="btn">[[#{more}]]</a>
+
             </div>
 
           </div>

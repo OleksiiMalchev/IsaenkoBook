@@ -17,6 +17,4 @@ public class CallbackController {
         callbackService.createCallback(callbackFormReqDTO);
         return "redirect:/main";
     }
-
-
 }

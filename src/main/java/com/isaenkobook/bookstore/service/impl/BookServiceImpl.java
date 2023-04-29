@@ -38,6 +38,10 @@ public class BookServiceImpl implements BookService {
                 .map(bookMapper::toBookRespDTO).toList();
     }
 
+    @Override
+    public List<BookRespDTO> findBooksByLangAndArticle(String lang, String article) {
+        return bookRepository.findByLangAndArticle(lang,article).stream().map(bookMapper::toBookRespDTO).toList();
+    }
 
 
     @Override
