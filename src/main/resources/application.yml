@@ -1,11 +1,15 @@
+DB_USERNAME: root
+DB_PASSWORD: root
+DB_URL: jdbc:mysql://localhost:3306/isaenkobook
+
 server:
   port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/isaenkobook
-    username: root
-    password: root
+    url: ${DB_URL}?serverTimezone=Europe/Kiev&useServerPrepStmts=false&rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
     ddl-auto: validate
@@ -19,3 +23,8 @@ spring:
     enabled: true
     locations: classpath:db.migration
     outOfOrder: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
