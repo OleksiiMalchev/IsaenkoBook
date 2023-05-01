@@ -15,6 +15,6 @@ public class CallbackController {
     @PostMapping("/callback")
     public String callback(@ModelAttribute("callback") CallbackFormReqDTO callbackFormReqDTO) {
         callbackService.createCallback(callbackFormReqDTO);
-        return "redirect:/main";
+        return "redirect:/";
     }
 }

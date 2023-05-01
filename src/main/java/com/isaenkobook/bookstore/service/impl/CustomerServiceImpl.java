@@ -4,6 +4,7 @@ import com.isaenkobook.bookstore.mapper.CustomerMapper;
 import com.isaenkobook.bookstore.model.Customer;
 import com.isaenkobook.bookstore.model.dto.CustomerReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import com.isaenkobook.bookstore.repository.CustomerRepository;
 import com.isaenkobook.bookstore.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerRespDTO createCustomer(CustomerReqDTO customerReqDTO) {
-        Customer customer = customerMapper.toCustomer(customerReqDTO);
+    public CustomerRespDTO createCustomer(PayReqDTO payReqDTO) {
+        Customer customer = customerMapper.toCustomer(payReqDTO);
         Customer customerSaveInBase = customerRepository.save(customer);
         return customerMapper.toCustomerRespDTO(customerSaveInBase);
     }

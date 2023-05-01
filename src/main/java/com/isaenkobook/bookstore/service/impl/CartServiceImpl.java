@@ -69,7 +69,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartItemRespDTO> getCartItems() {
-        return cartItems.values().stream().map(cartItemMapper::toCartItemRespDTO).toList();
+        return cartItems.values().stream()
+                .map(cartItemMapper::toCartItemRespDTO).toList();
     }
 
     @Override

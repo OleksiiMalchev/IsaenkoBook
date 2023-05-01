@@ -25,11 +25,11 @@ public class OrderMapper {
                     .id(order.getId())
                     .createdAt(order.getCreatedAt())
                     .changeAt(order.getChangeAt())
-                    .orderStatus(order.getOrderStatus())
-                    .orderDetails(order.getOrderDetails()
-                            .stream()
-                            .map(orderDetailsMapper::toOrderDetailsRespDTO).toList()
-                    ).build();
+                    .orderStatus(order.getOrderStatus()).build();
+//                    .orderDetails(order.getOrderDetails()
+//                            .stream()
+//                            .map(orderDetailsMapper::toOrderDetailsRespDTO).toList()
+//                    ).build();
         }
         return null;
     }

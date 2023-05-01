@@ -12,7 +12,7 @@ public class BookMapper {
                 .title(bookReqDTO.getTitle())
                 .authorId(bookReqDTO.getAuthorId())
                 .cover(bookReqDTO.getCover())
-                .formatBook(bookReqDTO.getFormatBook())
+
                 .language(bookReqDTO.getLanguage())
                 .price(bookReqDTO.getPrice())
                 .build();
@@ -25,7 +25,7 @@ public class BookMapper {
                 .title(book.getTitle())
                 .authorId(book.getAuthorId())
                 .language(book.getLanguage())
-                .formatBook(book.getFormatBook())
+
                 .price(book.getPrice())
                 .build();
     }

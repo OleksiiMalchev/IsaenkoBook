@@ -41,15 +41,15 @@ public class CustomerAddressController {
                 new ResponseEntity<>("Address with id:" + addressById + " not found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/address")
-    public ResponseEntity<? super AuthorRespDTO> createAddress(@RequestBody CustomerAddressReqDTO customerAddressReqDTO) {
-        if (customerAddressReqDTO == null) {
-            return new ResponseEntity<>("Request cannot be empty", HttpStatus.BAD_REQUEST);
-
-        }
-        CustomerAddressRespDTO customerAddress = customerAddressService.createCustomerAddress(customerAddressReqDTO);
-        return ResponseEntity.status(201).body(customerAddress);
-    }
+//    @PostMapping("/address")
+//    public ResponseEntity<? super AuthorRespDTO> createAddress(@RequestBody CustomerAddressReqDTO customerAddressReqDTO) {
+//        if (customerAddressReqDTO == null) {
+//            return new ResponseEntity<>("Request cannot be empty", HttpStatus.BAD_REQUEST);
+//
+//        }
+//        CustomerAddressRespDTO customerAddress = customerAddressService.createCustomerAddress(customerAddressReqDTO);
+//        return ResponseEntity.status(201).body(customerAddress);
+//    }
 
     @PutMapping("/address/{id}")
     public ResponseEntity<? super AuthorRespDTO> updateAddress(@RequestBody Map<Object, Object> fields,

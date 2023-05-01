@@ -3,18 +3,19 @@ package com.isaenkobook.bookstore.mapper;
 import com.isaenkobook.bookstore.model.CustomerAddress;
 import com.isaenkobook.bookstore.model.dto.CustomerAddressReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerAddressRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerAddressMapper {
 
-    public CustomerAddress toCustomerAddress(CustomerAddressReqDTO customerAddressReqDTO) {
+    public CustomerAddress toCustomerAddress(PayReqDTO payReqDTO, Long customerId) {
         return CustomerAddress.builder()
-                .customerId(customerAddressReqDTO.getCustomerId())
-                .country(customerAddressReqDTO.getCountry())
-                .city(customerAddressReqDTO.getCity())
-                .address(customerAddressReqDTO.getAddress())
-                .postOffice(customerAddressReqDTO.getPostOffice()).build();
+                .customerId(customerId)
+                .country(payReqDTO.getCountry())
+                .city(payReqDTO.getCity())
+                .address(payReqDTO.getAddress())
+                .postOffice(payReqDTO.getPostOffice()).build();
     }
 
 

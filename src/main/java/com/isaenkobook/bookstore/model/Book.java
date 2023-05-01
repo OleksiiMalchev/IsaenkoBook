@@ -36,12 +36,27 @@ public class Book {
     private Long authorId;
     @Column(name = "title")
     private String title;
+
     @Column(name = "cover")
     private String cover;
+
     @Column(name = "language")
     private String language;
-    @Column(name = "format_book")
-    private String formatBook;
+
+    @Column(name = "format_book_uk")
+    private String formatBookUK;
+
+    @Column(name = "format_book_en")
+    private String formatBookEN;
+
+
+    @Column(name = "format_book_ru")
+    private String formatBookRU;
+
+    @Column(name = "book_img")
+    private String bookImg;
+
+
     @Column(name = "price")
     private BigDecimal price;
     @Column(name = "article")

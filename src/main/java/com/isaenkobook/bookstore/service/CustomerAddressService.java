@@ -4,6 +4,7 @@ import com.isaenkobook.bookstore.model.dto.CustomerAddressReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerAddressRespDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CustomerAddressService {
     Optional<CustomerAddressRespDTO> findAddressById(Long customerAddressId);
 
 
-    CustomerAddressRespDTO createCustomerAddress(CustomerAddressReqDTO customerAddressReqDTO);
+    CustomerAddressRespDTO createCustomerAddress(PayReqDTO payReqDTO,Long customerId);
 
     CustomerAddressRespDTO updateCustomerAddress(Map<Object, Object> fields, Long customerAddressId);
 
