@@ -41,15 +41,15 @@ public class CustomerController {
                 new ResponseEntity<>("Customer with id:" + customerId + " not found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/customers")
-    public ResponseEntity<? super CustomerRespDTO> createCustomer(@RequestBody CustomerReqDTO customerReqDTO) {
-        if (customerReqDTO == null) {
-            return new ResponseEntity<>("Request cannot be empty", HttpStatus.BAD_REQUEST);
-
-        }
-        CustomerRespDTO customer = customerService.createCustomer(customerReqDTO);
-        return ResponseEntity.status(201).body(customer);
-    }
+//    @PostMapping("/customers")
+//    public ResponseEntity<? super CustomerRespDTO> createCustomer(@RequestBody CustomerReqDTO customerReqDTO) {
+//        if (customerReqDTO == null) {
+//            return new ResponseEntity<>("Request cannot be empty", HttpStatus.BAD_REQUEST);
+//
+//        }
+//        CustomerRespDTO customer = customerService.createCustomer(customerReqDTO);
+//        return ResponseEntity.status(201).body(customer);
+//    }
 
     @PutMapping("/customers/{id}")
     public ResponseEntity<? super AuthorRespDTO> updateCustomer(@RequestBody Map<Object, Object> fields,

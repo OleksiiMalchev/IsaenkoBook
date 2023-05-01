@@ -3,18 +3,18 @@ package com.isaenkobook.bookstore.mapper;
 import com.isaenkobook.bookstore.model.Customer;
 import com.isaenkobook.bookstore.model.dto.CustomerReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerMapper {
 
-    public Customer toCustomer(CustomerReqDTO customerReqDTO) {
+    public Customer toCustomer(PayReqDTO payReqDTO) {
         return Customer.builder()
-                .firstName(customerReqDTO.getFirstName())
-                .middleName(customerReqDTO.getMiddleName())
-                .lastName(customerReqDTO.getLastName())
-                .mobile(customerReqDTO.getMobile())
-                .email(customerReqDTO.getEmail()).build();
+                .firstName(payReqDTO.getFirstName())
+                .lastName(payReqDTO.getLastName())
+                .mobile(payReqDTO.getMobile())
+                .email(payReqDTO.getEmail()).build();
     }
 
     public CustomerRespDTO toCustomerRespDTO(Customer customer) {

@@ -2,6 +2,7 @@ package com.isaenkobook.bookstore.service;
 
 import com.isaenkobook.bookstore.model.dto.CustomerReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface CustomerService {
 
     Optional<CustomerRespDTO> findCustomerById(Long customerId);
 
-    CustomerRespDTO createCustomer(CustomerReqDTO customerReqDTO);
+    public CustomerRespDTO createCustomer(PayReqDTO payReqDTO);
 
     CustomerRespDTO updateCustomer(Map<Object, Object> fields, Long customerId);
 

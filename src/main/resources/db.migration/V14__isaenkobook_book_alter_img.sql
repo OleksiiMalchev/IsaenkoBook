@@ -1,0 +1,2 @@
+ALTER TABLE book
+ADD COLUMN book_img VARCHAR(255);

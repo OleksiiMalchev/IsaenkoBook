@@ -5,6 +5,7 @@ import com.isaenkobook.bookstore.model.Book;
 import com.isaenkobook.bookstore.model.CustomerAddress;
 import com.isaenkobook.bookstore.model.dto.CustomerAddressReqDTO;
 import com.isaenkobook.bookstore.model.dto.CustomerAddressRespDTO;
+import com.isaenkobook.bookstore.model.dto.PayReqDTO;
 import com.isaenkobook.bookstore.repository.CustomerAddressRepository;
 import com.isaenkobook.bookstore.repository.CustomerRepository;
 import com.isaenkobook.bookstore.service.CustomerAddressService;
@@ -37,17 +38,15 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
                 .map(customerAddressMapper::toCustomerAddressRespDTO);
     }
 
-
     @Override
-    public CustomerAddressRespDTO createCustomerAddress(CustomerAddressReqDTO customerAddressReqDTO) {
-        if (!customerAddressRepository.existsById(customerAddressReqDTO.getCustomerId())) {
+    public CustomerAddressRespDTO createCustomerAddress(PayReqDTO payReqDTO, Long customerId) {
+        if(!customerRepository.existsById(customerId)){
             return null;
         }
-        CustomerAddress customerAddress = customerAddressMapper.toCustomerAddress(customerAddressReqDTO);
+        CustomerAddress customerAddress = customerAddressMapper.toCustomerAddress(payReqDTO, customerId);
         CustomerAddress saveCustomerAddressInBase = customerAddressRepository.save(customerAddress);
-        return customerAddressMapper.toCustomerAddressRespDTO(saveCustomerAddressInBase);
+       return customerAddressMapper.toCustomerAddressRespDTO(saveCustomerAddressInBase);
     }
-
 
     @Override
     public CustomerAddressRespDTO updateCustomerAddress(Map<Object, Object> fields, Long customerAddressId) {
